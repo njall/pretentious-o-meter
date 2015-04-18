@@ -3,6 +3,12 @@ $( document ).ready(function(){
         var film_name = $('#name').val();
         runAll(film_name);
     }),
+    $(document).keypress(function(e){
+        if(e.which == 13) {
+            var film_name = $('#name').val();
+            runAll(film_name);
+        }
+    }),
     $('#ex1').click(function(){
         var film_name = $('#ex1').val();
         runAll(film_name);
@@ -73,17 +79,42 @@ function runAll(film_name){
                 $('#rt-rating').text(data.tomatoRating);
                 if (data.Poster != 'N/A') {
                 $('#poster').attr('src', data.Poster); }
-                if (data.imdbRating && ((data.Metascore && data.Metascore != 'N/A') || data.tomatoMeter){
-                    var difference = (data.imdbRating*10)-data.Metascore;
+
+
+                var include_rt = $('#rt').is(':checked');
+                var include_imdb = $('#imdb').is(':checked');
+                
+                if (!(include_rt && data.tomatoRating && data.tomatoMeter)) {
+                    include_rt = false;
+                } 
+                if (!(include_imdb && (data.Metascore && data.Metascore != 'N/A') && data.imdbRating)) {
+                    include_imdb = false;
+                }
+
+                if (include_rt == true && include_imdb == true) {
+                    console.log('here');
+                    var public_rating = ((data.imdbRating*10) + (data.tomatoRating*10))/2;
+                    var critic_rating = (parseInt(data.Metascore) + parseInt(data.tomatoMeter))/2;
+                } else if (include_rt && !include_imdb) {
+                    var critic_rating = data.tomatoMeter;
+                    var public_rating = data.tomatoRating*10;
+                } else if (include_imdb) {
+                    var critic_rating = data.Metascore;   
+                    var public_rating = data.imdbRating*10;
+                }
+
+                if (critic_rating && public_rating){
+                    var difference = public_rating - critic_rating;
+
                     var score = 0;
                     if (difference > 0){
                         var pretentious = false;
-                        score = difference * Math.log(data.imdbRating*10);
+                        score = difference * Math.log(public_rating)*1.3;
                         
                     } else { /*on the pretencious spectrum */
                         var pretentious = true;
                         console.log('difference: ' + difference);
-                        score = difference * Math.log(data.Metascore*10);
+                        score = difference * Math.log(critic_rating)*1.3;
                         
                         console.log('score: ' + score);
                     };
@@ -109,14 +140,14 @@ function runAll(film_name){
                             break;
                     };      
                     
-                    if (data.imdbRating > 6.5) {
-                        text = text + '... People really love it though';
+                    if (public_rating > 65) {
+                        text = text + '... In general people like it';
                     } else {
-                        text = text + '... But people really do not like it';
+                        text = text + '... In general people don\'t like it';
                     }
                     $('#message').text(text);
                } else {
-                    $('#message').text('Film doesn\'t have enough ratings. It must suck.');
+                    $('#message').text('Film doesn\'t have enough ratings, sorry.');
 
                 };
             };
