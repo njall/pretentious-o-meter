@@ -2,25 +2,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
 <script src="index.js"></script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fed7250555f73e3" async="async"></script>
+
 </head>
 
 <body>
-  <div class="jumbotron">
+  <div class="jumbotron" style="height:90%">
 	<div class="container">
 		<h1>Pretentious-O-Meter</h1>
 		<h3> Find out whether a film is air-headed pretentious nonsense, or whether it's re-hashed, formulaic trash</h3><br>
+		<br><br>
 
 		<div class="row">
-		  <div class="col-lg-6">
+		  <div class="col-lg-2"></div>
+		  <div class="col-lg-8">
 		    <div class="input-group">
 		      <input type="text" class="form-control text-center" placeholder="Film Name..." id="name">
 			      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button" id="submit">Go!</button>
+		        <button class="btn btn-default" type="button" id="submit">Go</button>
 		      </span>
 		    </div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
-
+		<br><br>
+		<br><br>
 		<label id="message"></label><br>
 		<div class="progress">
 		  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
@@ -30,4 +36,6 @@
 		<div class="film-info"></div>
 	</div>
   </div>
+
+<div class="text-center" style="width: 50%; margin: 0 auto;">&copy; <a href="http://niallbeard.co.uk">Niall Beard</a></span>
 </body>
