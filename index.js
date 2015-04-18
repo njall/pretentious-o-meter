@@ -26,11 +26,31 @@ $( document ).ready(function(){
     $('#ex6').click(function(){
         var film_name = $('#ex6').val();
         runAll(film_name);
+    }),
+    $('#ex7').click(function(){
+        var film_name = $('#ex7').val();
+        runAll(film_name);
+    }),
+    $('#ex8').click(function(){
+        var film_name = $('#ex8').val();
+        runAll(film_name);
+    }),
+    $('#ex9').click(function(){
+        var film_name = $('#ex9').val();
+        runAll(film_name);
+    }),
+    $('#ex10').click(function(){
+        var film_name = $('#ex10').val();
+        runAll(film_name);
+    }),
+    $('#ex11').click(function(){
+        var film_name = $('#ex11').val();
+        runAll(film_name);
     })
 });
 
 function runAll(film_name){
-        $('#loader').show();
+        $('#loader').show();            
         film_name = film_name.replace(/\ /g, '+');
         var url = ["http://www.omdbapi.com/?",
                    "t=", film_name,
@@ -48,43 +68,55 @@ function runAll(film_name){
                 $('#year').text(data.Year);
                 $('#meta').text(data.Metascore);
                 $('#imdb-score').text(data.imdbRating);
-                $('#poster').attr('src', data.Poster);
+                if (data.Poster != 'N/A') {
+                $('#poster').attr('src', data.Poster); }
                 if (data.imdbRating && data.Metascore && data.Metascore != 'N/A'){
                     var difference = (data.imdbRating*10)-data.Metascore;
                     var score = 0;
                     if (difference > 0){
+                        var pretentious = false;
                         score = difference * Math.log(data.imdbRating*10);
-                        score = Math.max(score, 0);
+                        
                     } else { /*on the pretencious spectrum */
+                        var pretentious = true;
                         console.log('difference: ' + difference);
                         score = difference * Math.log(data.Metascore*10);
-                        score = Math.min(score, 100);
+                        
                         console.log('score: ' + score);
                     };
-                    $('#pretentious-score').text(score);
                     var score = 50 - score/2;
+                    score = Math.min(score, 100);
+                    score = Math.max(score, 0);
+                    $('#pret-val').text(Math.round(score) + '%');
 
                     $('.progress-bar').attr('style', 'width: ' + score + '%');
+                    var text = '';
                     switch(true){
                         case (score >= 75):
-                            $('#message').text('Get on your monocle. We have an overrated, pretencious turd. (' + score + ')');
+                            text = 'Get on your monocle squire, we have a pretentious one.'
                             break;
                         case (score > 50 && score < 75):
-                            $('#message').text('Probably a fairly original film without being too esoteric. (' + score + ')');
+                            text = 'Probably a fairly original film that is also entertaining.';
                             break;
                         case( score <= 50 && score > 25):
-                            $('#message').text('A film for normal people. (' + score + ')');
+                            text = 'Made for the masses.';
                             break;
                         case( score <= 25):
-                            $('#message').text('Either unoriginal, slapstick, or mainstream.  (' + score + ')');
+                            text = 'Unoriginal, slapstick, or mainstream.';
                             break;
                     };      
-                } else {
-                    $('#message').text('Film doesn\'t have a rating. Must suck.');
+                    
+                    if (data.imdbRating > 6.5) {
+                        text = text + '... People really love it though';
+                    } else {
+                        text = text + '... But people really do not like it';
+                    }
+                    $('#message').text(text);
+               } else {
+                    $('#message').text('Film doesn\'t have enough ratings. It must suck.');
 
                 };
             };
-
         });
             setTimeout(function() {
                 $('#loader').hide();            
