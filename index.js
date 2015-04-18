@@ -14,16 +14,16 @@ $( document ).ready(function(){
                 $('#message').attr('text-color', 'red');
             } else {
                 console.log(data.Rating);
-                var score = .5-((data.imdbRating*10)-data.Metascore)/200
-                $('#meter').attr('value', score);
+                var score = 50-((data.imdbRating*10)-data.Metascore)/2;
+                $('.progress-bar').attr('style', 'width: ' + score + '%');
                 switch(true){
-                    case (score > 0.5):
+                    case (score > 50):
                         $('#message').text('Films probably quite pretencious. (' + score + ')');
                         break;
-                    case( score <= 0.5):
+                    case( score <= 50):
                         $('#message').text('Films probably quite dumb. (' + score + ')');
                         break;
-                };
+                };		
             };
         });
     });
