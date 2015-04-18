@@ -55,6 +55,7 @@ function runAll(film_name){
         var url = ["http://www.omdbapi.com/?",
                    "t=", film_name,
                    "&y=",
+                   "&tomatoes=true",
                    "&plot=short",
                    "&r=json"].join('');
         var res = jQuery.getJSON(url, function( data ){
@@ -68,9 +69,11 @@ function runAll(film_name){
                 $('#year').text(data.Year);
                 $('#meta').text(data.Metascore);
                 $('#imdb-score').text(data.imdbRating);
+                $('#tomatometer').text(data.tomatoMeter);
+                $('#rt-rating').text(data.tomatoRating);
                 if (data.Poster != 'N/A') {
                 $('#poster').attr('src', data.Poster); }
-                if (data.imdbRating && data.Metascore && data.Metascore != 'N/A'){
+                if (data.imdbRating && ((data.Metascore && data.Metascore != 'N/A') || data.tomatoMeter){
                     var difference = (data.imdbRating*10)-data.Metascore;
                     var score = 0;
                     if (difference > 0){
