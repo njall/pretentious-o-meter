@@ -56,7 +56,7 @@ $( document ).ready(function(){
 });
 
 function runAll(film_name){
-        $('#loader').show();            
+        $('#loader').show();  
         film_name = film_name.replace(/\ /g, '+');
         var url = ["http://www.omdbapi.com/?",
                    "t=", film_name,
@@ -65,6 +65,7 @@ function runAll(film_name){
                    "&plot=short",
                    "&r=json"].join('');
         var res = jQuery.getJSON(url, function( data ){
+            $('.modal').addClass("loading"); 
             console.log(data);
             if (data.Response === 'False'){
                 $('#message').text(data.Error);
@@ -73,10 +74,10 @@ function runAll(film_name){
                 $('#film-info').show();
                 $('#title').text(data.Title);
                 $('#year').text(data.Year);
-                $('#meta').text(data.Metascore);
-                $('#imdb-score').text(data.imdbRating);
-                $('#tomatometer').text(data.tomatoMeter);
-                $('#rt-rating').text(data.tomatoRating);
+                $('#meta').text(data.Metascore + ' / 100');
+                $('#imdb-score').text(data.imdbRating + ' / 10');
+                $('#tomatometer').text(data.tomatoMeter + ' / 100');
+                $('#rt-rating').text(data.tomatoUserRating + ' / 5');
                 if (data.Poster != 'N/A') {
                 $('#poster').attr('src', data.Poster); }
 
@@ -84,7 +85,7 @@ function runAll(film_name){
                 var include_rt = $('#rt').is(':checked');
                 var include_imdb = $('#imdb').is(':checked');
                 
-                if (!(include_rt && data.tomatoRating && data.tomatoMeter)) {
+                if (!(include_rt && data.tomatoUserRating && data.tomatoMeter)) {
                     include_rt = false;
                 } 
                 if (!(include_imdb && (data.Metascore && data.Metascore != 'N/A') && data.imdbRating)) {
@@ -93,11 +94,11 @@ function runAll(film_name){
 
                 if (include_rt == true && include_imdb == true) {
                     console.log('here');
-                    var public_rating = ((data.imdbRating*10) + (data.tomatoRating*10))/2;
+                    var public_rating = ((data.imdbRating*10) + (data.tomatoUserRating*20))/2;
                     var critic_rating = (parseInt(data.Metascore) + parseInt(data.tomatoMeter))/2;
                 } else if (include_rt && !include_imdb) {
                     var critic_rating = data.tomatoMeter;
-                    var public_rating = data.tomatoRating*10;
+                    var public_rating = data.tomatoUserRating*20;
                 } else if (include_imdb) {
                     var critic_rating = data.Metascore;   
                     var public_rating = data.imdbRating*10;
@@ -106,37 +107,59 @@ function runAll(film_name){
                 if (critic_rating && public_rating){
                     var difference = public_rating - critic_rating;
 
+/*Better formula...
+=0.5 +/- [(|diff|/maxdiff)^0.5]/2
+where + sign if critics higher or - sign of public
+maxdiff should be the biggest possible difference which is technically 9, but will likely be much lower, maybe set to 3/4/5*/
+
                     var score = 0;
                     if (difference > 0){
                         var pretentious = false;
-                        score = difference * Math.log(public_rating)*1.3;
+                        score = Math.pow((difference/5), 0.5)*50 /* Math.log(public_rating)*1.3*/;
                         
                     } else { /*on the pretencious spectrum */
                         var pretentious = true;
-                        console.log('difference: ' + difference);
-                        score = difference * Math.log(critic_rating)*1.3;
-                        
-                        console.log('score: ' + score);
+                        score = Math.pow((Math.abs(difference)/5), 0.5)*50 /* Math.log(public_rating)*1.3*/;
                     };
-                    var score = 50 - score/2;
                     score = Math.min(score, 100);
-                    score = Math.max(score, 0);
-                    $('#pret-val').text(Math.round(score) + '%');
 
-                    $('.progress-bar').attr('style', 'width: ' + score + '%');
+                    
+
+                    if (pretentious) {
+                        $('#pretentious').attr('style', 'width: ' + score + '%');
+                        $('#mass-market').attr('style', 'width: 0%; float: right;');
+                        $('#pret-val').text(Math.round(score) + '% Pretentious');
+                    } else {
+                        $('#mass-market').attr('style', 'width: ' + score + '%; float: right;');
+                        $('#pretentious').attr('style', 'width: 0%;');
+                        $('#pret-val').text(Math.round(score) + '% Mass Market');
+                    }  
+
                     var text = '';
                     switch(true){
-                        case (score >= 75):
-                            text = 'Get on your monocle squire, we have a pretentious one.'
+                        case (pretentious && score >= 75):
+                            text = 'Pop in your monocle squire, we have ourselves a pretentious one.'
                             break;
-                        case (score > 50 && score < 75):
-                            text = 'Probably a fairly original film that is also entertaining.';
+                        case (pretentious && score > 50 && score < 75):
+                            text = 'Critics like this one a lot more than the audience does.';
                             break;
-                        case( score <= 50 && score > 25):
-                            text = 'Made for the masses.';
+                        case( pretentious && score <= 50 && score > 25):
+                            text = 'Probably a fairly original film.';
                             break;
-                        case( score <= 25):
-                            text = 'Unoriginal, slapstick, or mainstream.';
+                        case( pretentious && score <= 25):
+                            text = 'The critics and the people have reached a consensus.';
+                            break;
+                            case( !pretentious && score <= 25):
+                            text = 'The people and the critics have a consensus.';
+                            break;
+                        case( !pretentious && score <= 50 && score > 25):
+                            text = 'Probably a touch predictable';
+                            break;
+                        case (!pretentious && score > 50 && score < 75):
+                            text = 'The audience likes this one a lot more than critics do.';
+                            break;
+                        case (!pretentious && score >= 75):
+                            text = 'Get on your dungarees, Ma. This ones made for the commoner.'
                             break;
                     };      
                     
@@ -151,6 +174,7 @@ function runAll(film_name){
 
                 };
             };
+            $('.modal').removeClass("loading"); 
         });
             setTimeout(function() {
                 $('#loader').hide();            
