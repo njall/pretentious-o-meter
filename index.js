@@ -99,7 +99,7 @@ function runAll(film_name){
                 var include_rt = $('#rt').is(':checked');
                 var include_imdb = $('#imdb').is(':checked');
                 
-                if (!(include_rt && data.tomatoUserRating && data.tomatoMeter)) {
+                if (!(include_rt && data.tomatoUserRating && data.tomatoMeter && data.tomatoMeter != 'N/A')) {
                     include_rt = false;
                 } 
                 if (!(include_imdb && (data.Metascore && data.Metascore != 'N/A') && data.imdbRating)) {
