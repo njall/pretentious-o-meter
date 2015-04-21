@@ -58,7 +58,36 @@ $( document ).ready(function(){
     $('#ex11').click(function(){
         var film_name = $('#ex11').val();
         runAll(film_name);
+    }),
+    $('#ex12').click(function(){
+        var film_name = $('#ex12').val();
+        runAll(film_name);
+    }),
+    $('#ex13').click(function(){
+        var film_name = $('#ex13').val();
+        runAll(film_name);
+    }),
+    $('#ex14').click(function(){
+        var film_name = $('#ex14').val();
+        runAll(film_name);
+    }),
+    $('#ex15').click(function(){
+        var film_name = $('#ex15').val();
+        runAll(film_name);
+    }),
+    $('#ex16').click(function(){
+        var film_name = $('#ex16').val();
+        runAll(film_name);
+    }),
+    $('#ex17').click(function(){
+        var film_name = $('#ex17').val();
+        runAll(film_name);
+    }),
+    $('#ex18').click(function(){
+        var film_name = $('#ex18').val();
+        runAll(film_name);
     })
+
 });
 
 function getParameterByName(name) {
