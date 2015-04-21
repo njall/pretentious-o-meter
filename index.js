@@ -1,4 +1,10 @@
 $( document ).ready(function(){
+
+    var name = getParameterByName('q');
+    if (name != '') {
+        runAll(name);
+    }
+
     $('#submit').click(function(){
         var film_name = $('#name').val();
         runAll(film_name);
@@ -55,6 +61,13 @@ $( document ).ready(function(){
     })
 });
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 function runAll(film_name){
         $('#loader').show();  
         film_name = film_name.replace(/\ /g, '+');
@@ -65,7 +78,6 @@ function runAll(film_name){
                    "&plot=short",
                    "&r=json"].join('');
         var res = jQuery.getJSON(url, function( data ){
-            $('.modal').addClass("loading"); 
             console.log(data);
             if (data.Response === 'False'){
                 $('#message').text(data.Error);
@@ -78,6 +90,8 @@ function runAll(film_name){
                 $('#imdb-score').text(data.imdbRating + ' / 10');
                 $('#tomatometer').text(data.tomatoMeter + ' / 100');
                 $('#rt-rating').text(data.tomatoUserRating + ' / 5');
+                $('#link-icon').show();
+                $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_name)
                 if (data.Poster != 'N/A') {
                 $('#poster').attr('src', data.Poster); }
 
@@ -115,11 +129,11 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     var score = 0;
                     if (difference > 0){
                         var pretentious = false;
-                        score = Math.pow((difference/5), 0.5)*50 /* Math.log(public_rating)*1.3*/;
+                        score = Math.pow((difference/5), 0.45)*50 /* Math.log(public_rating)*1.3*/;
                         
                     } else { /*on the pretencious spectrum */
                         var pretentious = true;
-                        score = Math.pow((Math.abs(difference)/5), 0.5)*50 /* Math.log(public_rating)*1.3*/;
+                        score = Math.pow((Math.abs(difference)/5), 0.45)*50 /* Math.log(public_rating)*1.3*/;
                     };
                     score = Math.min(score, 100);
 
@@ -174,8 +188,8 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
 
                 };
             };
-            $('.modal').removeClass("loading"); 
         });
+        
             setTimeout(function() {
                 $('#loader').hide();            
             }, 500); 
