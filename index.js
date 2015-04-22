@@ -15,7 +15,7 @@ $( document ).ready(function(){
             runAll(film_name);
         }
     }),
-    $('[id=*"ex"]').click(function(){
+    $('[id*=ex]').click(function(){
       var film_name = $(this).val();
       runAll(film_name);
     })
