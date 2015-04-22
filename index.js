@@ -15,79 +15,10 @@ $( document ).ready(function(){
             runAll(film_name);
         }
     }),
-    $('#ex1').click(function(){
-        var film_name = $('#ex1').val();
-        runAll(film_name);
-    }),
-    $('#ex2').click(function(){
-        var film_name = $('#ex2').val();
-        runAll(film_name);
-    }),
-    $('#ex3').click(function(){
-        var film_name = $('#ex3').val();
-        runAll(film_name);
-    }),
-    $('#ex4').click(function(){
-        var film_name = $('#ex4').val();
-        runAll(film_name);
-    }),
-    $('#ex5').click(function(){
-        var film_name = $('#ex5').val();
-        runAll(film_name);
-    }),
-    $('#ex6').click(function(){
-        var film_name = $('#ex6').val();
-        runAll(film_name);
-    }),
-    $('#ex7').click(function(){
-        var film_name = $('#ex7').val();
-        runAll(film_name);
-    }),
-    $('#ex8').click(function(){
-        var film_name = $('#ex8').val();
-        runAll(film_name);
-    }),
-    $('#ex9').click(function(){
-        var film_name = $('#ex9').val();
-        runAll(film_name);
-    }),
-    $('#ex10').click(function(){
-        var film_name = $('#ex10').val();
-        runAll(film_name);
-    }),
-    $('#ex11').click(function(){
-        var film_name = $('#ex11').val();
-        runAll(film_name);
-    }),
-    $('#ex12').click(function(){
-        var film_name = $('#ex12').val();
-        runAll(film_name);
-    }),
-    $('#ex13').click(function(){
-        var film_name = $('#ex13').val();
-        runAll(film_name);
-    }),
-    $('#ex14').click(function(){
-        var film_name = $('#ex14').val();
-        runAll(film_name);
-    }),
-    $('#ex15').click(function(){
-        var film_name = $('#ex15').val();
-        runAll(film_name);
-    }),
-    $('#ex16').click(function(){
-        var film_name = $('#ex16').val();
-        runAll(film_name);
-    }),
-    $('#ex17').click(function(){
-        var film_name = $('#ex17').val();
-        runAll(film_name);
-    }),
-    $('#ex18').click(function(){
-        var film_name = $('#ex18').val();
-        runAll(film_name);
+    $('[id=*"ex"]').click(function(){
+      var film_name = $(this).val();
+      runAll(film_name);
     })
-
 });
 
 function getParameterByName(name) {
