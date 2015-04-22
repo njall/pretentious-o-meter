@@ -157,7 +157,7 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                         config: function () {  
                             this.page.identifier = film_slug;  
                             this.page.title = data.Title
-                            this.page.url = 'http://localhost?q=' + film_slug;
+                            this.page.url = 'http://pretentious-o-meter.co.uk?q=' + film_slug;
                         }
                     });
                } else {
