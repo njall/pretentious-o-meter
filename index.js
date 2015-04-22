@@ -143,14 +143,16 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                         text = text + '... In general people don\'t like it';
                     }
                     $('#message').text(text);
+                    setTimeout(function() {
+                        $('#loader').hide();            
+                    }, 500); 
                } else {
                     $('#message').text('Film doesn\'t have enough ratings, sorry.');
+                    setTimeout(function() {
+                        $('#loader').hide();            
+                    }, 500); 
 
                 };
             };
         });
-        
-            setTimeout(function() {
-                $('#loader').hide();            
-            }, 500); 
 }
