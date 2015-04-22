@@ -4,6 +4,7 @@ $( document ).ready(function(){
     if (name != '') {
         runAll(name);
     }
+    $('#comments').hide();
 
     $('#submit').click(function(){
         var film_name = $('#name').val();
@@ -27,7 +28,7 @@ function getParameterByName(name) {
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
+    
 function runAll(film_name){
         $('#loader').show();  
         film_name = film_name.replace(/\ /g, '+');
@@ -43,6 +44,7 @@ function runAll(film_name){
                 $('#message').text(data.Error);
                 $('#message').attr('text-color', 'red');
             } else {
+                var film_slug = data.Title.replace(/\ /g, "+")
                 $('#film-info').show();
                 $('#title').text(data.Title);
                 $('#year').text(data.Year);
@@ -51,7 +53,7 @@ function runAll(film_name){
                 $('#tomatometer').text(data.tomatoMeter + ' / 100');
                 $('#rt-rating').text(data.tomatoUserRating + ' / 5');
                 $('#link-icon').show();
-                $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_name)
+                $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_slug)
                 if (data.Poster != 'N/A') {
                 $('#poster').attr('src', data.Poster); }
 
@@ -142,10 +144,22 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     } else {
                         text = text + '... In general people don\'t like it';
                     }
+
                     $('#message').text(text);
                     setTimeout(function() {
                         $('#loader').hide();            
                     }, 500); 
+                    
+                    $('#comments').show();
+                    $('#comment-title').text(data.Title);
+                    DISQUS.reset({
+                        reload: true,
+                        config: function () {  
+                            this.page.identifier = film_slug;  
+                            this.page.title = data.Title
+                            this.page.url = 'http://localhost?q=' + film_slug;
+                        }
+                    });
                } else {
                     $('#message').text('Film doesn\'t have enough ratings, sorry.');
                     setTimeout(function() {
