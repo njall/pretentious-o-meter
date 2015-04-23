@@ -43,6 +43,9 @@ function runAll(film_name){
             if (data.Response === 'False'){
                 $('#message').text(data.Error);
                 $('#message').attr('text-color', 'red');
+               setTimeout(function() {
+                        $('#loader').hide();            
+               }, 500); 
             } else {
                 var film_slug = data.Title.replace(/\ /g, "+")
                 $('#film-info').show();
@@ -165,7 +168,6 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     setTimeout(function() {
                         $('#loader').hide();            
                     }, 500); 
-
                 };
             };
         });
