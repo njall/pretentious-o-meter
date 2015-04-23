@@ -13,4 +13,5 @@ Pop in a film name and find out whether it's pure cheese or sophisticated fromag
 
 # Contributors
 
-* Paul Beard
+* Paul Beard (tuning model)
+* Lauren Beard (logo) http://laurenbeard.co.uk
