@@ -57,8 +57,7 @@ function runAll(film_name){
                 $('#rt-rating').text(data.tomatoUserRating + ' / 5');
                 $('#link-icon').show();
                 $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_slug)
-                if (data.Poster != 'N/A') {
-                $('#poster').attr('src', data.Poster); }
+                $('#poster').attr('src', 'http://img.omdbapi.com/?i=' + data.imdbID + '&apikey=8d8ace5a&h=275' );
 
 
                 var include_rt = $('#rt').is(':checked');
