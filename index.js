@@ -1,5 +1,7 @@
 $( document ).ready(function(){
 
+    $.getScript("share.min.js");
+
     var name = getParameterByName('q');
     if (name != '') {
         runAll(name);
@@ -56,6 +58,7 @@ function runAll(film_name){
                 $('#tomatometer').text(data.tomatoMeter + ' / 100');
                 $('#rt-rating').text(data.tomatoUserRating + ' / 5');
                 $('#link-icon').show();
+                $('#share-link').attr('href', 'http://pretentious-o-meter.co.uk?q=' + film_slug)
                 $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_slug)
                 $('#poster').attr('src', 'http://img.omdbapi.com/?i=' + data.imdbID + '&apikey=8d8ace5a&h=275' );
 
@@ -107,10 +110,13 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                         $('#pretentious').attr('style', 'width: ' + score + '%');
                         $('#mass-market').attr('style', 'width: 0%; float: right;');
                         $('#pret-val').text(Math.round(score) + '% Pretentious');
+                        film_slug.replace("+", "%2B")
+                        var social_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + '%25 pretentious on the Pretentious-O-Meter!'
                     } else {
                         $('#mass-market').attr('style', 'width: ' + score + '%; float: right;');
                         $('#pretentious').attr('style', 'width: 0%;');
                         $('#pret-val').text(Math.round(score) + '% Mass Market');
+                        var social_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + '%25 mass market on the Pretentious-O-Meter!' 
                     }  
 
                     var text = '';
@@ -157,11 +163,61 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     DISQUS.reset({
                         reload: true,
                         config: function () {  
-                            this.page.identifier = film_slug;  
-                            this.page.title = data.Title
-                            this.page.url = 'http://pretentious-o-meter.co.uk?q=' + film_slug;
+                            this.page.identifier = film_slug,
+                            this.page.title = data.Title,
+                            this.page.url = 'http://pretentious-o-meter.co.uk?q=' + film_slug
                         }
                     });
+                    
+                    $('#sharing-button-text').show();
+                    var share = new Share(".sharing-button", {
+                        url: 'http://pretentious-o-meter.co.uk?q=' + film_slug,
+                        description: social_desc + '%0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug),
+                        title: social_desc,
+                        image: 'http://pretentious-o-meter.co.uk/pretentiouscat1.gif',
+                        ui: {
+                            flyout: 'right',
+                            button_text: 'Share Results'
+                        },
+                        networks: {
+                            pinterest: {
+                                enabled: false
+                            },
+                            facebook: {
+                                caption: social_desc,
+                                app_id: 287504138040462,
+                                after: function() {
+                                   this.toggle();
+                                   this.toggle();
+                                    $('.entypo-export').css('display', 'none');
+                                }
+                            },
+                            twitter: {
+                                after: function() {
+                                   this.toggle();
+                                   this.toggle();
+                                    $('.entypo-export').css('display', 'none');
+                                }
+                            },
+                            google_plus: {
+                                after: function() {
+                                   this.toggle();
+                                   this.toggle();
+                                    $('.entypo-export').css('display', 'none');
+                                }
+                            },
+                            email: {
+                                after: function() {
+                                   this.toggle();
+                                   this.toggle();
+                                    $('.entypo-export').css('display', 'none');
+                                }
+                            }
+                        }
+                    });
+                    share.open();
+                    $('.entypo-export').css('display', 'none');
+                    
                } else {
                     $('#message').text('Film doesn\'t have enough ratings, sorry.');
                     setTimeout(function() {
