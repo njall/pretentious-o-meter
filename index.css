@@ -20,6 +20,11 @@
     display:none
 }
 
+.pretentious-cat {
+    max-height:180px;
+    margin-left:50px;
+}
+
 .copyright-footer {
     width: 50%;
     margin: 0 auto 3%;
