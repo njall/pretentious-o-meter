@@ -111,12 +111,16 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                         $('#mass-market').attr('style', 'width: 0%; float: right;');
                         $('#pret-val').text(Math.round(score) + '% Pretentious');
                         film_slug.replace("+", "%2B")
-                        var social_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + '%25 pretentious on the Pretentious-O-Meter!'
+                        var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
+                        '%25 pretentious on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
+                        var social_desc = data.Title + ' is ' + Math.round(score) + '% pretentious on the Pretentious-O-Meter!'
                     } else {
                         $('#mass-market').attr('style', 'width: ' + score + '%; float: right;');
                         $('#pretentious').attr('style', 'width: 0%;');
                         $('#pret-val').text(Math.round(score) + '% Mass Market');
-                        var social_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + '%25 mass market on the Pretentious-O-Meter!' 
+                        var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
+                        '%25 mass market on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
+                        var social_desc = data.Title + ' is ' + Math.round(score) + '% mass market on the Pretentious-O-Meter!'
                     }  
 
                     var text = '';
@@ -172,7 +176,7 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     $('#sharing-button-text').show();
                     var share = new Share(".sharing-button", {
                         url: 'http://pretentious-o-meter.co.uk?q=' + film_slug,
-                        description: social_desc + '%0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug),
+                        description: social_desc,
                         title: social_desc,
                         image: 'http://pretentious-o-meter.co.uk/pretentiouscat1.gif',
                         ui: {
@@ -193,6 +197,7 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                                 }
                             },
                             twitter: {
+                                description: twitter_desc,
                                 after: function() {
                                    this.toggle();
                                    this.toggle();
