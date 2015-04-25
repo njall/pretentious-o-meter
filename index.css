@@ -15,3 +15,61 @@
   opacity: 1;
   max-width: 50px; /* More than it will ever come, notice that this affects on animation duration */
 }
+
+#loader {
+    display:none
+}
+
+.header-title {
+    float: left;
+}
+
+.header {
+    margin-bottom: 200px
+}
+
+.pretentious-cat {
+    max-height:180px;
+    margin-left:50px;
+}
+
+.pretentious-cat-container {
+    float: right;
+    width: 20%;
+}
+
+.subtitle {
+    margin-top: 4%;
+}
+
+.copyright-footer {
+    width: 50%;
+    margin: 0 auto 3%;
+}
+
+.jumbo-tiny-text p {
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.jumbo-results {
+    height:auto
+}
+
+.search-box {
+    margin-top: 3%;
+}
+
+.examples {
+    margin-top: 2%;
+}
+
+.search-options {
+    width: 35%;
+    margin: 0 auto;
+}
+
+body {
+    margin-top: 1%;
+}

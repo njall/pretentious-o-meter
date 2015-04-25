@@ -1,8 +1,11 @@
+<html>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
-	<script src="index.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="index.css"/>
+
+    <script src="index.js"></script>
 	<!-- Go to www.addthis.com/dashboard to customize your tools -->
 	<!--script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fed7250555f73e3" async="async"></script-->
 
@@ -24,208 +27,196 @@
 	href="pretentiouscat1.gif" />
 	<title>Pretentious-O-Meter</title>
 	<meta name='description' content="Find out whether a film is pure cheese or sophisticated fromage">
-	<meta name="og:image" = 'http://pretentious-o-meter.co.uk/pretentiouscat1.gif'>
-	<meta name="twitter:image" = 'http://pretentious-o-meter.co.uk/pretentiouscat1.gif'>
+	<meta name="og:image" content='http://pretentious-o-meter.co.uk/pretentiouscat1.gif'>
+	<meta name="twitter:image" content='http://pretentious-o-meter.co.uk/pretentiouscat1.gif'>
 	<meta name='author' content="Niall Beard">
 	<meta name='keywords' content="pretentious, film, rating, imdb, rotten tomatoes, critic, public, analysis">
 </head>
 
 <body>
 	<div class="container">
-		<br>
 		<div class="jumbotron">
 			<div class="row">
 				<table>
 					<tr style="width:70%">				
 						<td>
 							<div class="h1 text-center">Pretentious-O-Meter</div><br>
-							<div class="h4">Pop in a film name or click an example to find out whether a film is pure cheese or sophisticated fromage.</div>
+							<div class="h4 text-center">
+								Pop in a film name or click an example to find out whether a film is pure cheese or sophisticated fromage.
+							</div>
 						</td>
 						<td>
 							<img src="pretentiouscat1.gif" style="max-height:180px"></div>
 						</td>
 					</tr>
 				</table>
-				<br>
-			
 
-					<div class="row">
-						<button type="button" class="btn btn-default" id="ex1" value='Dumb & Dumber'>Dumb & Dumber</button>
-						<button type="button" class="btn btn-default" id="ex2" value='Birdman: Or'>Birdman</button>
-						<button type="button" class="btn btn-default" id="ex3" value='Starship Troopers'>Starship Troopers</button>
-						<button type="button" class="btn btn-default" id="ex4" value='Argo'>Argo</button>
-						<button type="button" class="btn btn-default" id="ex5" value='Mrs. doubtfire'>Mrs. doubtfire</button>
-						<button type="button" class="btn btn-default" id="ex6" value='The Artist'>The Artist</button>
-						<button type="button" class="btn btn-default" id="ex7" value='The Avengers'>The Avengers</button>
-						<button type="button" class="btn btn-default" id="ex8" value='Batman Forever'>Batman Forever</button>
-						<button type="button" class="btn btn-default" id="ex9" value='Free Willy'>Free Willy</button>
-						<button type="button" class="btn btn-default" id="ex10" value='Hobbit'>The Hobbit</button>
-						<button type="button" class="btn btn-default" id="ex11" value='Big Momma'>Big Momma's House</button>
-						<button type="button" class="btn btn-default" id="ex12" value='Sideways'>Sideways</button>
-						<button type="button" class="btn btn-default" id="ex13" value='lost in translation'>Lost in Translation</button>
-						<button type="button" class="btn btn-default" id="ex14" value='princess mononoke'>Princess Mononoke</button>
-						<button type="button" class="btn btn-default" id="ex15" value='Battle Royale'>Battle Royale</button>
-						<button type="button" class="btn btn-default" id="ex16" value='The Matrix'>The Matrix</button>
-						<button type="button" class="btn btn-default" id="ex17" value='machete kills'>Machete Kills</button>
-						<button type="button" class="btn btn-default" id="ex18" value='12 angry men'>12 Angry Men</button>
-						<button type="button" class="btn btn-default" id="ex19" value='amadeus'>Amadeus</button>
-					</div><!-- /.row -->
-					<br><br>
-					<div class="row">
-						<div class="col-lg-3"></div>
-						<div class="col-lg-6">
-							<div class="input-group">
-								<input type="text" class="form-control text-center" placeholder="Film Name..." id="name">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button" id="submit">Go</button>
-								</span>
-							</div><!-- /input-group -->
-						</div><!-- /.col-lg-6 -->
-					</div><!-- /.col-lg-6 -->
-					<div class="row">
-						<div style="width: 35%; margin: 0 auto; float:center">
-							<span class="text-center">Use:</span>
-                            <span class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default">
-                                    <input type="checkbox" id='imdb' autocomplete="off">IMDB
-                                </label>
-                                <label class="btn btn-default active">
-                                    <input type="checkbox" id='rt' autocomplete="off" checked>Rotten Tomatoes
-                                </label>
+                <div class="row examples">
+                    <button type="button" class="btn btn-default" id="ex1" value='Dumb & Dumber'>Dumb & Dumber</button>
+                    <button type="button" class="btn btn-default" id="ex2" value='Birdman: Or'>Birdman</button>
+                    <button type="button" class="btn btn-default" id="ex3" value='Starship Troopers'>Starship Troopers</button>
+                    <button type="button" class="btn btn-default" id="ex4" value='Argo'>Argo</button>
+                    <button type="button" class="btn btn-default" id="ex5" value='Mrs. doubtfire'>Mrs. doubtfire</button>
+                    <button type="button" class="btn btn-default" id="ex6" value='The Artist'>The Artist</button>
+                    <button type="button" class="btn btn-default" id="ex7" value='The Avengers'>The Avengers</button>
+                    <button type="button" class="btn btn-default" id="ex8" value='Batman Forever'>Batman Forever</button>
+                    <button type="button" class="btn btn-default" id="ex9" value='Free Willy'>Free Willy</button>
+                    <button type="button" class="btn btn-default" id="ex10" value='Hobbit'>The Hobbit</button>
+                    <button type="button" class="btn btn-default" id="ex11" value='Big Momma'>Big Momma's House</button>
+                    <button type="button" class="btn btn-default" id="ex12" value='Sideways'>Sideways</button>
+                    <button type="button" class="btn btn-default" id="ex13" value='lost in translation'>Lost in Translation</button>
+                    <button type="button" class="btn btn-default" id="ex14" value='princess mononoke'>Princess Mononoke</button>
+                    <button type="button" class="btn btn-default" id="ex15" value='Battle Royale'>Battle Royale</button>
+                    <button type="button" class="btn btn-default" id="ex16" value='The Matrix'>The Matrix</button>
+                    <button type="button" class="btn btn-default" id="ex17" value='machete kills'>Machete Kills</button>
+                    <button type="button" class="btn btn-default" id="ex18" value='12 angry men'>12 Angry Men</button>
+                    <button type="button" class="btn btn-default" id="ex19" value='amadeus'>Amadeus</button>
+                </div><!-- /.row -->
+
+                <div class="row search-box">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-center" placeholder="Film Name..." id="name">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="submit">Go</button>
                             </span>
-						</div>
-					</div>
-				</div>
-			</div>
+                        </div>
+                    </div>
+                </div>
 
-			<div class="jumbotron" style="height:auto">
-				<div class="row">
-					<div class="col-lg-8">
-						<table>
-							<tr>
-								<div class="col-lg-1"></div>
-								<div class="col-lg-10">
-									<h1><span id='pret-val'>
-									</span></h1>
-								</div>
-							</tr>
-							<tr>
-								<img id='loader' style="display:none" src="ajax-loader.gif"/>
-								<label id="message" class="text-center"></label><br><br>		
-							</tr>
-							<tr>
-								<span>
-								<table style="width:100%;">
-										<tr style="width:100%;">
-											<td style="width:50%;">
-												<div class="progress" style="padding-right: 0px; padding-left: 0px;">
-													<div id='mass-market' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%; float:right">
-														<span class="sr-only"></span>
-													</div>
-												</div>
-											</td>
-											<td style="width:50%;">
-												<div class="progress" style="padding-right: 0px; padding-left: 0px;">
-													<div id='pretentious' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-														<span class="sr-only"><i class="glyphicon-play"></i></span>
-													</div>
-												</div>
-											</td>
-										</tr>
-									</table>
-									<table style="width:100%;">
-									<tr style="width:100%">
-										<span>
-											<td style="width:20%"><div class="text-left">&nbsp&nbsp&nbsp|<br>100%<br>Mass-market</div></td>
-											<td style="width:20%; padding-right:70px"><div class="text-center">|<br>50%<br> </span></td>
-											<td style="width:20%"><div class="text-center">|<br>0%<br>Consensus</div></td>
-											<td style="width:20%"><div class="text-center">|&nbsp<br>50%<br> </div></td>
-											<td style="width:20%;"><div class="text-right">|&nbsp&nbsp&nbsp&nbsp&nbsp<br>100%<br>Very Pretentious</span></td>
-											</span>
-										</tr>				
-										</table>
-								</span>
-							</tr>
-							<tr>
-							<hr>
-							<td>
-							<span class="h4">Permalink  <i id='link-icon' class="glyphicon glyphicon-link"></i></span>
-							<span><a id='share-link' class="h4">http://pretentious-o-meter.co.uk</a></span>
-							</td>
-							<td>
-							 <div class="h4" id='sharing-button-text' style="display:none">Share this films results:</div><div class="sharing-button"></div>
-							 </td>
-							 <hr>
-							</tr>
-						</table>
-					</div>
-					<span class="col-lg-4">
-						<div id='film-info' style="display:none; padding-right:5px">
-						<table>
-							<tr>
-								<span class="text-center">
-									<a class="h3 url" id="title"></a><span class="h4"> (<span id='year'></span>)</span>
-								</span>
-								<br><br>
-								</tr>
-								<tr>
-								<td>
-									<img id='poster' style="max-height:275px;"></img>		
-								</td>
-								<td style="padding-left:20px">
-								
-										<h4><u>Critics</u></h4>
-										<b>IMDB Metascore:</b> <div id='meta'></div>
-										<b>RT Rating:</b> <div id='rt-critic-rating'></div>
-										<h4><u>Public</u></h4>
-										<b>IMDB Rating:</b> <div id='imdb-score'></div>
-										<b>RT User Rating:</b> <div id='rt-rating'></div>
-									</span>
-								</td>
-							</tr>
-						</table>
-						</div>
+                <div class="row search-options">
+                    Use:
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="checkbox" id='imdb' autocomplete="off">IMDB
+                        </label>
+                        <label class="btn btn-default active">
+                            <input type="checkbox" id='rt' autocomplete="off" checked>RottenTomatoes
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-					</span>
-				</div>
-			</div>
-			<div id='comments'>
-				<div class="row">
-					<div class="jumbotron">
-						<div class="h2">Analysis of <span class="comment-title"> this film</span></div>
-						Share your thoughts on what caused <span class="comment-title">this film</span> to have a divergence between critics and audiences. <br>
-						<div id="disqus_thread"></div>
-						<script type="text/javascript">
-							/* * * CONFIGURATION VARIABLES * * */
-							var disqus_shortname = 'pretentiousometer';
+        <div class="jumbotron jumbo-results">
+            <div class="row">
+                <div class="col-lg-8">
+                    <table>
+                        <tr>
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <h1><span id='pret-val'>
+                                </span></h1>
+                            </div>
+                        </tr>
+                        <tr>
+                            <img id='loader' src="ajax-loader.gif"/>
+                            <label id="message" class="text-center"></label><br><br>
+                        </tr>
+                        <tr>
+                            <span>
+                                <table style="width:100%;">
+                                    <tr style="width:100%;">
+                                        <td style="width:50%;">
+                                            <div class="progress" style="padding-right: 0px; padding-left: 0px;">
+                                                <div id='mass-market' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%; float:right">
+                                                    <span class="sr-only"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="width:50%;">
+                                            <div class="progress" style="padding-right: 0px; padding-left: 0px;">
+                                                <div id='pretentious' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                    <span class="sr-only"><i class="glyphicon-play"></i></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="width:100%;">
+                                    <tr style="width:100%">
+                                        <span>
+                                            <td style="width:20%"><div class="text-left">&nbsp&nbsp&nbsp|<br>100%<br>Mass-market</div></td>
+                                            <td style="width:20%; padding-right:70px"><div class="text-center">&nbsp&nbsp|<br>50%<br> </div></td>
+                                            <td style="width:20%"><div class="text-center">|<br>0%<br>Consensus</div></td>
+                                            <td style="width:20%"><div class="text-center">|&nbsp<br>50%<br> </div></td>
+                                            <td style="width:20%;"><div class="text-right">|&nbsp&nbsp&nbsp&nbsp&nbsp<br>100%<br>Very Pretentious</div></td>
+                                        </span>
+                                    </tr>
+                                </table>
+                            </span>
+                        </tr>
+                        <tr>
+                            <hr>
+                            <td>
+                                <span class="h4">Permalink  <i id='link-icon' class="glyphicon glyphicon-link"></i></span><br>
+                                <span><a id='share-link' class="h4">http://pretentious-o-meter.co.uk</a></span>
+                            </td>
+                            <td>
+                                <div class="h4" id='sharing-button-text' style="display:none">Share this films results:</div><div class="sharing-button"></div>
+                            </td>
+                            <hr>
+                        </tr>
+                    </table>
+                </div>
 
-							/* * * DON'T EDIT BELOW THIS LINE * * */
-							(function() {
-								var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-								dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-								(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-							})();
-						</script>
-						<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-					</div>
-				</div>
-			</div>
+                <span class="col-lg-4">
+                    <div id='film-info' style="display:none; padding-right:5px">
+                        <table>
+                            <tr>
+                                <span class="text-center">
+                                    <a class="h3 url" id="title"></a><span class="h4"> (<span id='year'></span>)</span>
+                                </span>
+                                <br><br>
+                                </tr>
+                                <tr>
+                                <td>
+                                    <img id='poster' style="max-height:275px;"/>
+                                </td>
+                                <td style="padding-left:20px">
+                                    <h4><u>Critics</u></h4>
+                                    <b>IMDB Metascore:</b> <div id='meta'></div>
+                                    <b>RT Rating:</b> <div id='rt-critic-rating'></div>
+                                    <h4><u>Public</u></h4>
+                                    <b>IMDB Rating:</b> <div id='imdb-score'></div>
+                                    <b>RT User Rating:</b> <div id='rt-rating'></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </span>
+            </div>
+        </div>
 
-			<div class="row">
-				<div class="jumbotron">
-					<h2>What Am I Seeing Here?</h2><br> 
-					IMDB and Rotten Tomatoes have public ratings and critic ratings.<br> 
-					Whenever there's a big gap between the two it usually means a film is either very pretentious and too esoteric for regular audiences, or its too formulaic and derivative for critics to give it a decent score; but is entertaining.<br>
-					The pretentious-o-meter calculates the difference between critic and public opinion for a film on Rotten Tomatoes and IMDB. This is then plotted on the meter. Plots towards 'pretentious' mean the audience didn't like it but the critics loved it. Plots towards 'mass market' mean critics didn't care for it but the audience loved it. <br>
-					<br>
-					<h5>Feedback is welcome to niallbeard [at] gmail.com. <a href="https://github.com/njall/pretentious-o-meter">Source code is free for all</a></h5>
-				</div>
-			</div>
-			<br>
-		</div>
-		<div class="text-center" style="width: 50%; margin: 0 auto;">&copy; 2015, <a href="http://niallbeard.co.uk">Niall Beard</a></div>
-		<br><br>
-	</div>
+        <div class="jumbotron jumbo-tiny-text" id='comments'>
+            <div class="h2">Analysis of <span class="comment-title"> this film</span></div>
+            <p>Share your thoughts on what caused <span class="comment-title">this film</span> to have a divergence between critics and audiences.</p>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'pretentiousometer';
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+
+        <div class="jumbotron jumbo-tiny-text">
+            <h2>What Am I Seeing Here?</h2>
+            <p>IMDB and Rotten Tomatoes have public ratings and critic ratings.</p>
+            <p>Whenever there's a big gap between the two it usually means a film is either very pretentious and too esoteric for regular audiences, or its too formulaic and derivative for critics to give it a decent score; but is entertaining.</p>
+            <p>The pretentious-o-meter calculates the difference between critic and public opinion for a film on Rotten Tomatoes and IMDB. This is then plotted on the meter. Plots towards 'pretentious' mean the audience didn't like it but the critics loved it. Plots towards 'mass market' mean critics didn't care for it but the audience loved it. </p>
+            <p>Feedback is welcome to niallbeard [at] gmail.com. <a href="https://github.com/njall/pretentious-o-meter">Source code is free for all</a></p>
+        </div>
+
+    </div>
+    <div class="text-center copyright-footer">&copy; 2015, <a href="http://niallbeard.co.uk">Niall Beard</a></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
 		var disqus_shortname = 'pretentiousometer';
@@ -239,3 +230,4 @@
 		}());
 	</script>
 </body>
+</html>
