@@ -35,6 +35,11 @@
     margin-top: 2%;
 }
 
+.search-options {
+    width: 30%;
+    margin: 0 auto;
+}
+
 body {
     margin-top: 1%;
 }
