@@ -16,8 +16,8 @@
 
 	</script>
 	<link rel="image_src" 
-      type="image/jpeg" 
-      href="pretenciouscat1.gif" />
+	type="image/jpeg" 
+	href="pretenciouscat1.gif" />
 	<title>Pretentious-O-Meter</title>
 	<meta name='description' content="Find out whether a film is pure cheese or sophisticated fromage">
 	<meta name='author' content="Niall Beard">
@@ -77,70 +77,81 @@
 					<div class="col-lg-2"></div>
 					<div class="col-lg-8 text-center">
 						Permalink <i id='link-icon' class="glyphicon glyphicon-link"></i>
-					 	<a id='share-link' class="h4">http://pretentious-o-meter.co.uk</a>
-					 </div>
+						<a id='share-link' class="h4">http://pretentious-o-meter.co.uk</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="jumbotron" style="height:auto">
 				<div class="row">
 					<div class="col-lg-8">
-						<div class="row">
-							<div class="col-lg-1"></div>
-							<div class="col-lg-10">
-								<h1><span id='pret-val'>
-								</span></h1>
-							</div>
-						</div>
-						<img id='loader' style="display:none" src="ajax-loader.gif"/>
-						<label id="message" class="text-center"></label><br><br>		
-						<div class="row">
-							<div class="col-lg-6 progress" style="padding-right: 0px; padding-left: 0px;">
-								<div id='mass-market' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%; float:right">
-									<span class="sr-only"></span>
+						<table>
+							<tr>
+								<div class="col-lg-1"></div>
+								<div class="col-lg-10">
+									<h1><span id='pret-val'>
+									</span></h1>
 								</div>
-							</div>
-							<div class="col-lg-6 progress" style="padding-right: 0px; padding-left: 0px;">
-								<div id='pretentious' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-									<span class="sr-only"><i class="glyphicon-play"></i></span>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2"><span>&nbsp&nbsp&nbsp|</span></div>
-							<div class="col-lg-2"><div style="width: 10%; margin: 0 auto;">&nbsp&nbsp|</div></div>
-							<div class="col-lg-4"><div style="width: 10%; margin: 0 auto;">&nbsp&nbsp|</div></div>
-							<div class="col-lg-2"><div style="width: 10%; margin: 0 auto;">&nbsp&nbsp|</div></div>
-							<div class="col-lg-2"><div style="float:right">|&nbsp&nbsp&nbsp&nbsp</div></div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2"><span>100%</span></div>
-							<div class="col-lg-2"><div style="width: 10%; margin: 0 auto;">50%</div></div>
-							<div class="col-lg-4"><div style="width: 10%; margin: 0 auto;">0%</div></div>
-							<div class="col-lg-2"><div style="width: 10%; margin: 0 auto;">50%</div></div>
-							<div class="col-lg-2"><div style="float:right">100%</div></div>
-						</div>
-						<div class="row">
-							<div class="col-lg-3"><span>Mass-market / Unoriginal</span></div>
-							<div class="col-lg-5"><div class="text-centered" style="width: 10%; margin: 0 auto;">Consensus</div></div>
-							<div class="col-lg-4"><div style="float:right">Very Pretentious</div></div>
-						</div>
+							</tr>
+							<tr>
+								<img id='loader' style="display:none" src="ajax-loader.gif"/>
+								<label id="message" class="text-center"></label><br><br>		
+							</tr>
+							<tr>
+								<span>
+								<table style="width:100%;">
+										<tr style="width:100%;">
+											<td style="width:50%;">
+												<div class="progress" style="padding-right: 0px; padding-left: 0px;">
+													<div id='mass-market' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%; float:right">
+														<span class="sr-only"></span>
+													</div>
+												</div>
+											</td>
+											<td style="width:50%;">
+												<div class="progress" style="padding-right: 0px; padding-left: 0px;">
+													<div id='pretentious' class="progress-bar arrow active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+														<span class="sr-only"><i class="glyphicon-play"></i></span>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</table>
+									<table style="width:100%;">
+									<tr style="width:100%">
+										<span>
+											<td style="width:20%"><div class="text-left">&nbsp&nbsp&nbsp|<br>100%<br>Mass-market</div></td>
+											<td style="width:20%"><div class="text-center">&nbsp&nbsp|<br>50%<br> </span></td>
+											<td style="width:20%"><div class="text-center">|<br>0%<br>Consensus</div></td>
+											<td style="width:20%"><div class="text-center">|&nbsp<br>50%<br> </div></td>
+											<td style="width:20%;"><div class="text-right">|&nbsp&nbsp&nbsp&nbsp&nbsp<br>100%<br>Very Pretentious</span></td>
+											</span>
+										</tr>				
+										</table>
+								</span>
+							</tr>
+						</table>
 					</div>
-					<div class="col-lg-2">
-						<div id='film-info' style="display:none;">
-							<span><h3><span id="title"></span></h3> <h4>(<span id='year'></span>)</h4></span>
-							<h4>Critics</h4>
-							<b>IMDB Metascore:</b> <div id='meta'></div>
-							<b>RT TomatoMeter:</b> <div id='tomatometer'></div>
-							<h4>Public</h4>
-							<b>IMDB Rating:</b> <div id='imdb-score'></div>
-							<b>RT Rating:</b> <div id='rt-rating'></div>
-
-						</div>
-					</div>
-					<div class="col-lg-2">
-						<img id='poster' style="max-height:275px;"></img>		
-					</div>
+					<span class="col-lg-4">
+						<table>
+							<tr>
+								<td style="padding-right:20px">
+									<span id='film-info' style="display:none; padding-right:5px">
+										<span><h3><span id="title"></span></h3> <h4>(<span id='year'></span>)</h4></span>
+										<h4>Critics</h4>
+										<b>IMDB Metascore:</b> <div id='meta'></div>
+										<b>RT TomatoMeter:</b> <div id='tomatometer'></div>
+										<h4>Public</h4>
+										<b>IMDB Rating:</b> <div id='imdb-score'></div>
+										<b>RT Rating:</b> <div id='rt-rating'></div>
+									</span>
+								</td>
+								<td>
+									<img id='poster' style="max-height:275px;"></img>		
+								</td>
+							</tr>
+						</table>
+					</span>
 				</div>
 			</div>
 			<div id='comments'>
@@ -181,15 +192,15 @@
 		<br><br>
 	</div>
 	<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'pretentiousometer';
-    
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+		/* * * CONFIGURATION VARIABLES * * */
+		var disqus_shortname = 'pretentiousometer';
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function () {
+			var s = document.createElement('script'); s.async = true;
+			s.type = 'text/javascript';
+			s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		}());
+	</script>
 </body>
