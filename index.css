@@ -20,9 +20,26 @@
     display:none
 }
 
+.header-title {
+    float: left;
+}
+
+.header {
+    margin-bottom: 200px
+}
+
 .pretentious-cat {
     max-height:180px;
     margin-left:50px;
+}
+
+.pretentious-cat-container {
+    float: right;
+    width: 20%;
+}
+
+.subtitle {
+    margin-top: 4%;
 }
 
 .copyright-footer {
