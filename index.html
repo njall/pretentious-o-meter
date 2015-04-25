@@ -51,13 +51,14 @@
                     <button type="button" class="btn btn-default" id="ex9" value='Free Willy'>Free Willy</button>
                     <button type="button" class="btn btn-default" id="ex10" value='Hobbit'>The Hobbit</button>
                     <button type="button" class="btn btn-default" id="ex11" value='Big Momma'>Big Momma's House</button>
-                    <button type="button" class="btn btn-default" id="ex12" value='My Dinner with Andre'>My Dinner with Andre</button>
+                    <button type="button" class="btn btn-default" id="ex12" value='Sideways'>Sideways</button>
                     <button type="button" class="btn btn-default" id="ex13" value='lost in translation'>Lost in Translation</button>
                     <button type="button" class="btn btn-default" id="ex14" value='princess mononoke'>Princess Mononoke</button>
                     <button type="button" class="btn btn-default" id="ex15" value='Battle Royale'>Battle Royale</button>
                     <button type="button" class="btn btn-default" id="ex16" value='The Matrix'>The Matrix</button>
                     <button type="button" class="btn btn-default" id="ex17" value='machete kills'>Machete Kills</button>
                     <button type="button" class="btn btn-default" id="ex18" value='12 angry men'>12 Angry Men</button>
+                    <button type="button" class="btn btn-default" id="ex19" value='amadeus'>Amadeus</button>
                 </div><!-- /.row -->
 
                 <div class="row search-box">
@@ -75,8 +76,8 @@
                 <div class="row search-options">
                     Use:
                     <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default active">
-                            <input type="checkbox" id='imdb' autocomplete="off" checked>IMDB
+                        <label class="btn btn-default">
+                            <input type="checkbox" id='imdb' autocomplete="off">IMDB
                         </label>
                         <label class="btn btn-default active">
                             <input type="checkbox" id='rt' autocomplete="off" checked>RottenTomatoes
@@ -125,7 +126,7 @@
 									<tr style="width:100%">
 										<span>
 											<td style="width:20%"><div class="text-left">&nbsp&nbsp&nbsp|<br>100%<br>Mass-market</div></td>
-											<td style="width:20%"><div class="text-center">&nbsp&nbsp|<br>50%<br> </div></td>
+											<td style="width:20%; padding-right:70px"><div class="text-center">&nbsp&nbsp|<br>50%<br> </div></td>
 											<td style="width:20%"><div class="text-center">|<br>0%<br>Consensus</div></td>
 											<td style="width:20%"><div class="text-center">|&nbsp<br>50%<br> </div></td>
 											<td style="width:20%;"><div class="text-right">|&nbsp&nbsp&nbsp&nbsp&nbsp<br>100%<br>Very Pretentious</div></td>
@@ -163,10 +164,10 @@
 								<td style="padding-left:20px">
 										<h4><u>Critics</u></h4>
 										<b>IMDB Metascore:</b> <div id='meta'></div>
-										<b>RT TomatoMeter:</b> <div id='tomatometer'></div>
+                                        <b>RT Rating:</b> <div id='rt-critic-rating'></div>
 										<h4><u>Public</u></h4>
 										<b>IMDB Rating:</b> <div id='imdb-score'></div>
-										<b>RT Rating:</b> <div id='rt-rating'></div>
+										<b>RT User Rating:</b> <div id='rt-rating'></div>
 								</td>
 							</tr>
 						</table>

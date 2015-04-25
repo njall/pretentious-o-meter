@@ -57,7 +57,7 @@ function runAll(film_name){
                 $('#year').text(data.Year);
                 $('#meta').text(data.Metascore + ' / 100');
                 $('#imdb-score').text(data.imdbRating + ' / 10');
-                $('#tomatoRating').text(data.tomatoRating + ' / 10');
+                $('#rt-critic-rating').text(data.tomatoRating + ' / 10');
                 $('#rt-rating').text(data.tomatoUserRating + ' / 5');
                 $('#link-icon').show();
                 $('#share-link').attr('href', 'http://pretentious-o-meter.co.uk?q=' + film_slug)
@@ -100,10 +100,14 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                         var pretentious = false;
                         score = Math.pow((difference/5), 0.45)*50 /* Math.log(public_rating)*1.3*/;
                         
-                    } else { /*on the pretencious spectrum */
+                    } else if (difference < 0) { /*on the pretencious spectrum */
                         var pretentious = true;
-                        score = Math.pow((Math.abs(difference)/5), 0.45)*50 /* Math.log(public_rating)*1.3*/;
+                        score = Math.pow((Math.abs(difference)/3), 0.45)*50 /* Math.log(public_rating)*1.3*/;
+                    } else {
+                        var pretentious = true;
+                        score = 0
                     };
+
                     score = Math.min(score, 100);
 
                     
