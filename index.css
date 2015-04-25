@@ -20,3 +20,9 @@
     width: 50%;
     margin: 0 auto 3%;
 }
+
+.jumbo-tiny-text p {
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 100;
+}
