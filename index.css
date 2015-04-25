@@ -27,6 +27,10 @@
     font-weight: 100;
 }
 
+.jumbo-results {
+    height:auto
+}
+
 .search-box {
     margin-top: 3%;
 }
