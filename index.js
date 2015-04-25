@@ -52,10 +52,12 @@ function runAll(film_name){
                 var film_slug = data.Title.replace(/\ /g, "+")
                 $('#film-info').show();
                 $('#title').text(data.Title);
+                $('#title').attr('href', 'http://www.imdb.com/title/' + data.imdbID)
+                $('#title').attr('target', '_blank')
                 $('#year').text(data.Year);
                 $('#meta').text(data.Metascore + ' / 100');
                 $('#imdb-score').text(data.imdbRating + ' / 10');
-                $('#tomatometer').text(data.tomatoMeter + ' / 100');
+                $('#tomatoRating').text(data.tomatoRating + ' / 10');
                 $('#rt-rating').text(data.tomatoUserRating + ' / 5');
                 $('#link-icon').show();
                 $('#share-link').attr('href', 'http://pretentious-o-meter.co.uk?q=' + film_slug)
@@ -66,7 +68,7 @@ function runAll(film_name){
                 var include_rt = $('#rt').is(':checked');
                 var include_imdb = $('#imdb').is(':checked');
                 
-                if (!(include_rt && data.tomatoUserRating && data.tomatoMeter && data.tomatoMeter != 'N/A')) {
+                if (!(include_rt && data.tomatoUserRating && data.tomatoRating && data.tomatoRating != 'N/A')) {
                     include_rt = false;
                 } 
                 if (!(include_imdb && (data.Metascore && data.Metascore != 'N/A') && data.imdbRating)) {
@@ -76,9 +78,9 @@ function runAll(film_name){
                 if (include_rt == true && include_imdb == true) {
                     console.log('here');
                     var public_rating = ((data.imdbRating*10) + (data.tomatoUserRating*20))/2;
-                    var critic_rating = (parseInt(data.Metascore) + parseInt(data.tomatoMeter))/2;
+                    var critic_rating = (parseInt(data.Metascore) + parseInt(data.tomatoRating*10))/2;
                 } else if (include_rt && !include_imdb) {
-                    var critic_rating = data.tomatoMeter;
+                    var critic_rating = data.tomatoRating*10;
                     var public_rating = data.tomatoUserRating*20;
                 } else if (include_imdb) {
                     var critic_rating = data.Metascore;   
@@ -163,7 +165,7 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     }, 500); 
                     
                     $('#comments').show();
-                    $('#comment-title').text(data.Title);
+                    $('.comment-title').text(data.Title);
                     DISQUS.reset({
                         reload: true,
                         config: function () {  
