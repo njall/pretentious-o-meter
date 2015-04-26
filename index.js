@@ -43,7 +43,7 @@ $( document ).ready(function(){
 });
 
 function is_on_reddit(){
-    return false;
+    return true;
 }
 function downvote(){
     alert('downvoted');
@@ -52,7 +52,28 @@ function upvote(){
     alert('upvoted');
 }
 function submit_to_reddit(){
+    var res = jQuery.getJSON('http://www.reddit.com/api/me.json', function( data ){
+        console.log(data);
+        console.log(data.modhash);
+    });
+ /*   $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            api_type: 'json',
+            captcha: 'todo',
+            resubmit: 'false',
+            sr: 'pretentiousometer',
+            then: 'tb',
+            kind: 'link',
+            title: 'Film Name',
+            url: 'http://pretentious-o-meter.co.uk'
+        },
+        success: success,
+        dataType: dataType
+    });*/
     alert('submitted to reddit');
+
 }
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
