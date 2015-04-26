@@ -157,15 +157,15 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     var bar_colour = 'blue';
                     var rating = (public_rating + critic_rating)/2
                     switch (true){
-                        case (rating > 70):
+                        case (rating > 73):
                             bar_colour = 'green'
                             text = text + '... In general people like it';
                             break;
-                        case (rating > 60 && rating < 70):
+                        case (rating > 61 && rating <= 73):
                             bar_colour = 'orange'
                             text = text + '... In general people think it\'s alright.';
                             break;
-                        case (rating < 60):
+                        case (rating <= 61):
                             bar_colour = 'red'
                             text = text + '... In general people don\'t like it';
                             break;
