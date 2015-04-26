@@ -126,38 +126,6 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
 
                     score = Math.min(score, 100);
 
-                    var bar_colour = 'blue';
-                    var rating = (public_rating + critic_rating)/2
-                    switch (true){
-                        case (rating > 70):
-                            bar_colour = 'green'
-                            break;
-                        case (rating > 60 && rating < 70):
-                            bar_colour = 'orange'
-                            break;
-                        case (rating < 60):
-                            bar_colour = 'red'
-                            break;
-                    }
-
-
-                    if (pretentious) {
-                        $('#pretentious').attr('style', 'width: ' + score + '%; background-color:' + bar_colour);
-                        $('#mass-market').attr('style', 'width: 0%; float: right; background-color:' + bar_colour);
-                        $('#pret-val').text(Math.round(score) + '% Pretentious');
-                        film_slug.replace("+", "%2B")
-                        var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
-                        '%25 pretentious on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
-                        var social_desc = data.Title + ' is ' + Math.round(score) + '% pretentious on the Pretentious-O-Meter!'
-                    } else {
-                        $('#mass-market').attr('style', 'width: ' + score + '%; float: right; background-color:' + bar_colour);
-                        $('#pretentious').attr('style', 'width: 0%; background-color:' + bar_colour);
-                        $('#pret-val').text(Math.round(score) + '% Mass Market');
-                        var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
-                        '%25 mass market on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
-                        var social_desc = data.Title + ' is ' + Math.round(score) + '% mass market on the Pretentious-O-Meter!'
-                    }  
-
                     var text = '';
                     switch(true){
                         case (pretentious && score >= 75):
@@ -185,12 +153,41 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                             text = 'Get on your dungarees, Ma. This ones made for the commoner.'
                             break;
                     };      
-                    
-                    if (public_rating > 65) {
-                        text = text + '... In general people like it';
-                    } else {
-                        text = text + '... In general people don\'t like it';
+
+                    var bar_colour = 'blue';
+                    var rating = (public_rating + critic_rating)/2
+                    switch (true){
+                        case (rating > 70):
+                            bar_colour = 'green'
+                            text = text + '... In general people like it';
+                            break;
+                        case (rating > 60 && rating < 70):
+                            bar_colour = 'orange'
+                            text = text + '... In general people think it\'s alright.';
+                            break;
+                        case (rating < 60):
+                            bar_colour = 'red'
+                            text = text + '... In general people don\'t like it';
+                            break;
                     }
+
+
+                    if (pretentious) {
+                        $('#pretentious').attr('style', 'width: ' + score + '%; background-color:' + bar_colour);
+                        $('#mass-market').attr('style', 'width: 0%; float: right; background-color:' + bar_colour);
+                        $('#pret-val').text(Math.round(score) + '% Pretentious');
+                        film_slug.replace("+", "%2B")
+                        var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
+                        '%25 pretentious on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
+                        var social_desc = data.Title + ' is ' + Math.round(score) + '% pretentious on the Pretentious-O-Meter!'
+                    } else {
+                        $('#mass-market').attr('style', 'width: ' + score + '%; float: right; background-color:' + bar_colour);
+                        $('#pretentious').attr('style', 'width: 0%; background-color:' + bar_colour);
+                        $('#pret-val').text(Math.round(score) + '% Mass Market');
+                        var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
+                        '%25 mass market on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
+                        var social_desc = data.Title + ' is ' + Math.round(score) + '% mass market on the Pretentious-O-Meter!'
+                    }  
 
                     $('#message').text(text);
                     setTimeout(function() {
