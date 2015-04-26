@@ -18,63 +18,28 @@ $( document ).ready(function(){
             runAll(film_name);
         }
     }),
-    $('#reddit-upvote').click(function() {
-        var no_submit = is_on_reddit();
-        if (no_submit == false) {
-            upvote();
-        } else {
-            submit_to_reddit();
-            upvote();
-        }
-    }),
-    $('#reddit-downvote').click(function() {
-        var no_submit = is_on_reddit();
-        if  (no_submit) {
-            downvote();
-        } else {
-            submit_to_reddit();
-            downvote();
-        }
-    }),
     $('[id*=ex]').click(function(){
       var film_name = $(this).val();
       runAll(film_name);
     })
 });
 
-function is_on_reddit(){
-    return true;
+function setup_reddit(film_slug, social_desc) {
+    var url = 'http://pretentious-o-meter.co.uk?q%3d' + encodeURIComponent(film_slug)
+    var base_url = 'http://www.reddit.com/static'
+    var widget = "<iframe src=\"" + base_url + "/button/button3.html?width=120&url=" + url
+    widget += '&title=' + encodeURIComponent(social_desc)
+    widget += '&sr=' + 'pretentiousometer'
+    widget += '&newwindow=' + '1'
+    /*var css =  'font-size:20px;cursor:pointer;width:60px;margin:0;padding:12px 0;text-align:center;float:left;height:22px;position:relative;z-index:2;-moz-box-sizing:content-box;box-sizing:content-box;';*/
+    css = 'body { height:1000px } '
+    widget += '&css=' + encodeURIComponent(css)
+    widget += "\""
+    widget += " frameBorder='0'>"
+    console.log(widget)
+    $('#reddit-widget').html(widget);   
 }
-function downvote(){
-    alert('downvoted');
-}
-function upvote(){
-    alert('upvoted');
-}
-function submit_to_reddit(){
-    var res = jQuery.getJSON('http://www.reddit.com/api/me.json', function( data ){
-        console.log(data);
-        console.log(data.modhash);
-    });
- /*   $.ajax({
-        type: "POST",
-        url: url,
-        data: {
-            api_type: 'json',
-            captcha: 'todo',
-            resubmit: 'false',
-            sr: 'pretentiousometer',
-            then: 'tb',
-            kind: 'link',
-            title: 'Film Name',
-            url: 'http://pretentious-o-meter.co.uk'
-        },
-        success: success,
-        dataType: dataType
-    });*/
-    alert('submitted to reddit');
 
-}
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -279,7 +244,9 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                     });
                     share.open();
                     $('.entypo-export').css('display', 'none');
-                    
+                    $('meta[name="og:image"]').remove();
+                    $('head').append('<meta name="og:image" content="http://img.omdbapi.com/?i=' + data.imdbID + '&apikey=8d8ace5a&h=275">')
+                    setup_reddit(film_slug, social_desc);
                } else {
                     $('#message').text('Film doesn\'t have enough ratings, sorry.');
                     setTimeout(function() {

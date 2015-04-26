@@ -27,7 +27,7 @@
 	href="pretentiouscat1.gif" />
 	<title>Pretentious-O-Meter</title>
 	<meta name='description' content="Find out whether a film is pure cheese or sophisticated fromage">
-	<meta name="og:image" content='http://pretentious-o-meter.co.uk/pretentiouscat1.gif'>
+	<meta id="og-image" name="og:image" content='http://pretentious-o-meter.co.uk/pretentiouscat1.gif'>
 	<meta name="twitter:image" content='http://pretentious-o-meter.co.uk/pretentiouscat1.gif'>
 	<meta name='author' content="Niall Beard">
 	<meta name='keywords' content="pretentious, film, rating, imdb, rotten tomatoes, critic, public, analysis">
@@ -96,8 +96,6 @@
                         </label>
                     </div>
                 </div>
-                <div id="reddit-upvote" class="btn btn-default">upvote</div>
-                <div id="reddit-downvote" class="btn btn-default">downvote</div>
             </div>
         </div>
 
@@ -155,9 +153,11 @@
                                 <span class="h4">Permalink  <i id='link-icon' class="glyphicon glyphicon-link"></i></span><br>
                                 <span><a id='share-link' class="h4">http://pretentious-o-meter.co.uk</a></span>
                             </td>
-                            <td>
-                                <div class="h4" id='sharing-button-text' style="display:none">Share this films results:</div><div class="sharing-button"></div>
-                            </td>
+                        </tr>
+                                <div class="h4" id='sharing-button-text' style="display:none">Share this films results:</div>
+                                <div class="sharing-button"></div>
+                                <div style="margin-left: 250px; margin-top: -20px" id="reddit-widget"></div>
+                         
                             <hr>
                         </tr>
                     </table>
