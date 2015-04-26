@@ -35,7 +35,7 @@ function setup_reddit(film_slug, social_desc) {
     css = 'body { height:1000px } '
     widget += '&css=' + encodeURIComponent(css)
     widget += "\""
-    widget += " frameBorder='0'>"
+    widget += " frameBorder='0' style='width: 75px; height: 50px'>"
     console.log(widget)
     $('#reddit-widget').html(widget);   
 }
