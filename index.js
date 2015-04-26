@@ -18,12 +18,42 @@ $( document ).ready(function(){
             runAll(film_name);
         }
     }),
+    $('#reddit-upvote').click(function() {
+        var no_submit = is_on_reddit();
+        if (no_submit == false) {
+            upvote();
+        } else {
+            submit_to_reddit();
+            upvote();
+        }
+    }),
+    $('#reddit-downvote').click(function() {
+        var no_submit = is_on_reddit();
+        if  (no_submit) {
+            downvote();
+        } else {
+            submit_to_reddit();
+            downvote();
+        }
+    }),
     $('[id*=ex]').click(function(){
       var film_name = $(this).val();
       runAll(film_name);
     })
 });
 
+function is_on_reddit(){
+    return false;
+}
+function downvote(){
+    alert('downvoted');
+}
+function upvote(){
+    alert('upvoted');
+}
+function submit_to_reddit(){
+    alert('submitted to reddit');
+}
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
