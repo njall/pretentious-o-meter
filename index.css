@@ -43,8 +43,13 @@
 }
 
 .legend {
-	width: 40%;
+	width: 50%;
 	margin: 15px auto;
+}
+.legend-item {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
 }
 
 .copyright-footer {
