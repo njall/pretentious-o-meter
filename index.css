@@ -52,6 +52,21 @@
 	display: inline-block;
 }
 
+#reddit-widget {
+	margin-left: 250px;
+	 margin-top: -20px;
+}
+.permalink {
+	margin-top: 20px;
+}
+
+.sharing-buttons {
+	display: none;
+	width: 70%;
+	margin: 15px auto;
+	margin-top: 300px;
+}
+
 .copyright-footer {
     width: 50%;
     margin: 0 auto 3%;
