@@ -169,20 +169,28 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img id='poster' style="max-height:250px;"/>
+                                    <img id='poster' style="max-height:220px;"/>
                                 </td>
-                                <td style="padding-left:20px">
-                                    <h4><u>Critics</u></h4>
-                                    <b>IMDB:</b> <div id='meta-original'></div><div id='meta-percent'></div>
-                                    <b>RT:</b> <div id='rt-critic-rating-original'></div><div id='rt-critic-rating-percent'></div>
-                                    <h4><u>Public</u></h4>
-                                    <b>IMDB:</b> <div id='imdb-score-original'></div><div id='imdb-score-percent'></div>
-                                    <b>RT:</b> <div id='rt-rating-original'></div><div id='rt-rating-percent'></div>
+                                <td>
+                                	<table class="table table-bordered table-hover results"> 
+                                	<thead> 
+                                		<td></td><th>Critic</th><th>Public</th>
+                                	</thead>
+                                	<tr>
+                                		<th>IMDB</th>
+                                		<td><div id='meta-original'></div><div id='meta-percent'></div></td>
+                                		<td><div id='rt-critic-rating-original'></div><div id='rt-critic-rating-percent'></div></td>
+                                	</tr>
+                                	<tr>
+                                		<th>RT</th>
+                                		<td><div id='imdb-score-original'></div><div id='imdb-score-percent'></div></td>
+                                		<td><div id='rt-rating-original'></div><div id='rt-rating-percent'></div></td>
+                                	</tr>
+                                	</table>
+                                	<div class="toggle"><input type="checkbox" id="rating-type" checked></div>
                                 </td>
                             </tr>
-                            <tr>
-                            	<td></td><td><input type="checkbox" id="rating-type" checked></td>
-                            </tr>
+                            
                         </table>
                     </div>
                 </span>

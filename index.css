@@ -52,6 +52,22 @@
 	display: inline-block;
 }
 
+.results {
+
+	margin-left: 15px;
+	width: 200px;
+}
+.results td {
+	font-size: 14;
+	text-align: center;
+}
+#rating-type {
+	margin-left: 25px;
+}
+.toggle {
+	margin-left: 30px;
+	}
+
 #reddit-widget {
 	margin-left: 250px;
 	 margin-top: -20px;
