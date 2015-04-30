@@ -7,6 +7,14 @@ $( document ).ready(function(){
         runAll(name);
     }
     $('#comments').hide();
+    $('#rating-type').bootstrapToggle({
+            on: 'Percentage',
+            off: 'Original',
+            width: 120
+     });
+    $('#rating-type').change(function() {
+        toggleRatings();
+    })
 
     $('#submit').click(function(){
         var film_name = $('#name').val();
@@ -23,6 +31,17 @@ $( document ).ready(function(){
       runAll(film_name);
     })
 });
+
+function toggleRatings() {
+    $('#meta-original').toggle();
+    $('#meta-percent').toggle();
+    $('#rt-critic-rating-original').toggle();
+    $('#rt-critic-rating-percent').toggle();
+    $('#imdb-score-original').toggle();
+    $('#imdb-score-percent').toggle();
+    $('#rt-rating-original').toggle();
+    $('#rt-rating-percent').toggle();
+}
 
 function setup_reddit(film_slug, social_desc) {
     var url = 'http://pretentious-o-meter.co.uk?q%3d' + encodeURIComponent(film_slug)
@@ -46,7 +65,7 @@ function getParameterByName(name) {
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-    
+
 function runAll(film_name){
         $('#loader').show();  
         film_name = film_name.replace(/\ /g, '+');
@@ -71,15 +90,24 @@ function runAll(film_name){
                 $('#title').attr('href', 'http://www.imdb.com/title/' + data.imdbID)
                 $('#title').attr('target', '_blank')
                 $('#year').text(data.Year);
-                $('#meta').text(data.Metascore + ' / 100');
-                $('#imdb-score').text(data.imdbRating + ' / 10');
-                $('#rt-critic-rating').text(data.tomatoRating + ' / 10');
-                $('#rt-rating').text(data.tomatoUserRating + ' / 5');
+
+                $('#meta-original').text(data.Metascore + ' / 100').show();
+                $('#meta-percent').text(data.Metascore + '%').hide();
+                $('#rt-critic-rating-original').text(data.tomatoRating + ' / 10').show();
+                $('#rt-critic-rating-percent').text(data.tomatoRating*10 + '%').hide();
+                $('#imdb-score-original').text(data.imdbRating + ' / 10').show();
+                $('#imdb-score-percent').text(data.imdbRating*10 + '%').hide();
+                $('#rt-rating-original').text(data.tomatoUserRating + ' / 5').show();
+                $('#rt-rating-percent').text(data.tomatoUserRating*20 + '%').hide();
+
+                if ($('#rating-type').is(':checked')) {
+                    toggleRatings();
+                }
+
                 $('#link-icon').show();
                 $('#share-link').attr('href', 'http://pretentious-o-meter.co.uk?q=' + film_slug)
                 $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_slug)
                 $('#poster').attr('src', 'http://img.omdbapi.com/?i=' + data.imdbID + '&apikey=8d8ace5a&h=275' );
-
 
                 var include_rt = $('#rt').is(':checked');
                 var include_imdb = $('#imdb').is(':checked');
