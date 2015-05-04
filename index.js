@@ -258,6 +258,7 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                             },
                             twitter: {
                                 description: twitter_desc,
+                                url: ''
                                 after: function() {
                                    this.toggle();
                                    this.toggle();
