@@ -134,10 +134,14 @@ function runAll(film_name){
                 if (critic_rating && public_rating){
                     var difference = public_rating - critic_rating;
 
-/*Better formula...
-=0.5 +/- [(|diff|/maxdiff)^0.5]/2
-where + sign if critics higher or - sign of public
-maxdiff should be the biggest possible difference which is technically 9, but will likely be much lower, maybe set to 3/4/5*/
+/* Note:
+Pretentious films over around 15/20 years are usually so because of a self-fulfilling proffesy.
+More critics leave reviews for famous old films because of how popular they already are. They're
+ far less likely to go slag off an old rubbish film but they will affirm a great one. 
+As so I'm dampening the critic score of pretentious films by how old they are past 20 years. 
+*/
+                    var currentYear = (new Date).getFullYear();
+                    console.log(currentYear + ' - ' + data.Year + ' = ' + (currentYear - data.Year));
 
                     var score = 0;
                     if (difference > 0){
@@ -258,7 +262,7 @@ maxdiff should be the biggest possible difference which is technically 9, but wi
                             },
                             twitter: {
                                 description: twitter_desc,
-                                url: ''
+                                url: '',
                                 after: function() {
                                    this.toggle();
                                    this.toggle();
