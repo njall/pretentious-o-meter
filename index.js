@@ -134,14 +134,25 @@ function runAll(film_name){
                 if (critic_rating && public_rating){
                     var difference = public_rating - critic_rating;
 
-/* Note:
-Pretentious films over around 15/20 years are usually so because of a self-fulfilling proffesy.
-More critics leave reviews for famous old films because of how popular they already are. They're
- far less likely to go slag off an old rubbish film but they will affirm a great one. 
-As so I'm dampening the critic score of pretentious films by how old they are past 20 years. 
-*/
-                    var currentYear = (new Date).getFullYear();
-                    console.log(currentYear + ' - ' + data.Year + ' = ' + (currentYear - data.Year));
+                /* Note:
+                Popular films over around 15/20 years have accentuated pretentiousness because of a self-fulfilling prophecy.
+                More critics leave reviews for famous old films because of how popular they already are. They're
+                 far less likely to go slag off an old rubbish film but they will affirm a great one. 
+                As so I'm dampening the critic score of pretentious films by how old they are past 20 years. 
+                */
+                    var vintage_value = 0;
+                    try {
+                        var vintage_value = (new Date).getFullYear() - data.Year;
+                        if (vintage_value < 20)
+                            vintage_value = 0;
+                        else {
+                            vintage_value = (vintage_value/5)
+                        }
+
+                        console.log(currentYear + ' - ' + data.Year + ' = ' + (currentYear - data.Year));
+                    } catch(err) {
+                        /* shit happens */
+                    }
 
                     var score = 0;
                     if (difference > 0){
@@ -150,7 +161,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                         
                     } else if (difference < 0) { /*on the pretencious spectrum */
                         var pretentious = true;
-                        score = Math.pow((Math.abs(difference)/3), 0.45)*50 /* Math.log(public_rating)*1.3*/;
+                        score = Math.pow((Math.abs(difference)/(3+vintage_value)), 0.45)*50 /* Math.log(public_rating)*1.3*/;
                     } else {
                         var pretentious = true;
                         score = 0
