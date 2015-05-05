@@ -24,5 +24,5 @@ http://creativecommons.org/licenses/by/3.0/
 
 * [Lauren Beard](http://laurenbeard.co.uk) (logo design) 
 * [Luke Rodgers](http://www.lukerodgers.co.uk/) (code contribution)
-* Sam Gardner (code contribution)
+* [Sam Gardner](https://uk.linkedin.com/in/samgardner90) (code contribution)
 * Paul Beard (tuning model)
