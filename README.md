@@ -23,6 +23,6 @@ http://creativecommons.org/licenses/by/3.0/
 # Contributors
 
 * [Lauren Beard](http://laurenbeard.co.uk) (logo design) 
-* [Luke Rodgers](http://creativecommons.org/licenses/by/3.0/) (code contribution)
+* [Luke Rodgers](http://www.lukerodgers.co.uk/) (code contribution)
 * Sam Gardner (code contribution)
 * Paul Beard (tuning model)
