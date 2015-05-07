@@ -20,10 +20,18 @@ $( document ).ready(function(){
         var film_name = $('#name').val();
         runAll(film_name);
     }),
+    $('#name').on("keyup", function() {
+        var input = $(this).val();    
+        if (input.length > 2)
+        {
+            autocomplete(input)
+        }
+    }),
+
     $(document).keypress(function(e){
         if(e.which == 13) {
             var film_name = $('#name').val();
-            runAll(film_name);
+            runAll(film_name, '');
         }
     }),
     $('[id*=ex]').click(function(){
@@ -31,6 +39,34 @@ $( document ).ready(function(){
       runAll(film_name);
     })
 });
+
+function autocomplete(text) {
+    console.log(text);
+    var url = ["http://www.omdbapi.com/?",
+               "s=", text,
+               '&type=movie',
+                "&r=json"].join('');
+    var res = jQuery.getJSON(url, function( data ){
+        if (data.Search) {
+            var names = []
+            $.each(data.Search, function(i, v) {
+                console.log(v)
+                names.push({
+                    label: v.Title + ' (' + v.Year + ')',
+                    id: v.imdbID
+                })
+            }) 
+            /*console.log(names)*/
+            $('#name').autocomplete({
+                source: names,
+                select: function( event, ui ) {
+                    /*console.log(ui.item.id);*/
+                    runAll('', ui.item.id);
+                }
+            })
+        }
+    })
+}
 
 function toggleRatings() {
     $('#meta-original').toggle();
@@ -75,15 +111,20 @@ function ChangeUrl(page, url) {
         }
     }
 
-function runAll(film_name){
+function runAll(film_name, id){
         $('#loader').show();  
         film_name = film_name.replace(/\ /g, '+');
-        ChangeUrl(film_name, film_name)
         var url = ["http://www.omdbapi.com/?",
-                   "t=", film_name,
                    "&tomatoes=true",
                    '&type=movie',
                    "&r=json"].join('');
+        if (film_name && film_name != '') {
+            url = [url, '&t=', film_name].join('');
+        }
+        if (id && id != '') {
+            url = [url, '&i=', id].join('');
+        }
+        console.log(url)
         var res = jQuery.getJSON(url, function( data ){
             console.log(data);
             if (data.Response === 'False'){
@@ -94,6 +135,7 @@ function runAll(film_name){
                }, 500); 
             } else {
                 var film_slug = data.Title.replace(/\ /g, "+")
+                ChangeUrl(film_slug, film_slug)
                 $('#film-info').show();
                 $('#title').text(data.Title);
                 $('#title').attr('href', 'http://www.imdb.com/title/' + data.imdbID)
@@ -305,6 +347,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                         $('#loader').hide();            
                     }, 500); 
                 };
+                $('#name').val('');
             };
         });
 }
