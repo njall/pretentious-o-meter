@@ -24,7 +24,7 @@ $( document ).ready(function(){
         var input = $(this).val();    
         if (input.length > 2)
         {
-            autocomplete(input)
+            autocomplete(input)   
         }
     }),
 
@@ -41,7 +41,6 @@ $( document ).ready(function(){
 });
 
 function autocomplete(text) {
-    console.log(text);
     var url = ["http://www.omdbapi.com/?",
                "s=", text,
                '&type=movie',
@@ -50,7 +49,6 @@ function autocomplete(text) {
         if (data.Search) {
             var names = []
             $.each(data.Search, function(i, v) {
-                console.log(v)
                 names.push({
                     label: v.Title + ' (' + v.Year + ')',
                     id: v.imdbID
@@ -58,6 +56,7 @@ function autocomplete(text) {
             }) 
             /*console.log(names)*/
             $('#name').autocomplete({
+                delay: 300,
                 source: names,
                 select: function( event, ui ) {
                     /*console.log(ui.item.id);*/
@@ -124,7 +123,6 @@ function runAll(film_name, id){
         if (id && id != '') {
             url = [url, '&i=', id].join('');
         }
-        console.log(url)
         var res = jQuery.getJSON(url, function( data ){
             console.log(data);
             if (data.Response === 'False'){
@@ -155,9 +153,9 @@ function runAll(film_name, id){
                     toggleRatings();
                 }
 
-                $('#link-icon').show();
+                /*$('#link-icon').show();
                 $('#share-link').attr('href', 'http://pretentious-o-meter.co.uk?q=' + film_slug)
-                $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_slug)
+                $('#share-link').text('http://pretentious-o-meter.co.uk?q=' + film_slug)*/
                 $('#poster').attr('src', 'http://img.omdbapi.com/?i=' + data.imdbID + '&apikey=8d8ace5a&h=275' );
 
                 var include_rt = $('#rt').is(':checked');
@@ -171,7 +169,6 @@ function runAll(film_name, id){
                 }
 
                 if (include_rt == true && include_imdb == true) {
-                    console.log('here');
                     var public_rating = ((data.imdbRating*10) + (data.tomatoUserRating*20))/2;
                     var critic_rating = (parseInt(data.Metascore) + parseInt(data.tomatoRating*10))/2;
                 } else if (include_rt && !include_imdb) {
@@ -191,8 +188,6 @@ More critics leave reviews for famous old films because of how popular they alre
  far less likely to go slag off an old rubbish film but they will affirm a great one. 
 As so I'm dampening the critic score of pretentious films by how old they are past 20 years. 
 */
-                    var currentYear = (new Date).getFullYear();
-                    console.log(currentYear + ' - ' + data.Year + ' = ' + (currentYear - data.Year));
 
                     var score = 0;
                     if (difference > 0){
