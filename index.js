@@ -66,10 +66,19 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+function ChangeUrl(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = { Page: page, Url: '?q=' + url };
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            console.log("Browser does not support HTML5.");
+        }
+    }
+
 function runAll(film_name){
         $('#loader').show();  
-
         film_name = film_name.replace(/\ /g, '+');
+        ChangeUrl(film_name, film_name)
         var url = ["http://www.omdbapi.com/?",
                    "t=", film_name,
                    "&tomatoes=true",
