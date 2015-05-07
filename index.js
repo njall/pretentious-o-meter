@@ -68,12 +68,12 @@ function getParameterByName(name) {
 
 function runAll(film_name){
         $('#loader').show();  
+
         film_name = film_name.replace(/\ /g, '+');
         var url = ["http://www.omdbapi.com/?",
                    "t=", film_name,
-                   "&y=",
                    "&tomatoes=true",
-                   "&plot=short",
+                   '&type=movie',
                    "&r=json"].join('');
         var res = jQuery.getJSON(url, function( data ){
             console.log(data);
@@ -150,7 +150,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                         
                     } else if (difference < 0) { /*on the pretencious spectrum */
                         var pretentious = true;
-                        score = Math.pow((Math.abs(difference)/3), 0.45)*50 /* Math.log(public_rating)*1.3*/;
+                        score = Math.pow((Math.abs(difference)/3.5), 0.45)*50 /* Math.log(public_rating)*1.3*/;
                     } else {
                         var pretentious = true;
                         score = 0
@@ -161,7 +161,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                     var text = '';
                     switch(true){
                         case (pretentious && score >= 75):
-                            text = 'Pop in your monocle squire, we have ourselves a pretentious one.'
+                            text = 'Pop in your monocle squire, one finds it to be pretentious.'
                             break;
                         case (pretentious && score > 50 && score < 75):
                             text = 'Critics like this one a lot more than the audience does.';
