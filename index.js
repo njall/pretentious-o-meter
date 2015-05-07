@@ -22,10 +22,11 @@ $( document ).ready(function(){
     }),
     $('#name').keyup(function() {
         var input = $(this).val();    
-        if (input.length > 2)
-        {
-            console.log(input)
+        if (input.length > 2){
+            console.log(input.length);
             autocomplete(input)   
+        } else {
+            $('#name').autocomplete({source: []})
         }
     }),
 
@@ -46,7 +47,6 @@ function autocomplete(text) {
                "s=", encodeURIComponent(text),
                '&type=movie',
                 "&r=json"].join('');
-                console.log(url)
     var res = jQuery.getJSON(url, function( data ){
         if (data.Search) {
             var names = []
@@ -56,12 +56,10 @@ function autocomplete(text) {
                     id: v.imdbID
                 })
             }) 
-            /*console.log(names)*/
             $('#name').autocomplete({
                 delay: 300,
                 source: names,
                 select: function( event, ui ) {
-                    /*console.log(ui.item.id);*/
                     runAll('', ui.item.id);
                 }
             })
@@ -92,7 +90,6 @@ function setup_reddit(film_slug, social_desc) {
     widget += '&css=' + encodeURIComponent(css)
     widget += "\""
     widget += " frameBorder='0' style='width: 75px; height: 50px'>"
-    console.log(widget)
     $('#reddit-widget').html(widget);   
 }
 
