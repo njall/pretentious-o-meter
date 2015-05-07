@@ -52,6 +52,9 @@
 	display: inline-block;
 }
 
+.jumbotron h1 {
+	font-size: 61px;
+}
 .results {
 
 	margin-left: 15px;
