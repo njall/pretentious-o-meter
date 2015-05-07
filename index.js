@@ -20,10 +20,11 @@ $( document ).ready(function(){
         var film_name = $('#name').val();
         runAll(film_name);
     }),
-    $('#name').on("keyup", function() {
+    $('#name').keyup(function() {
         var input = $(this).val();    
         if (input.length > 2)
         {
+            console.log(input)
             autocomplete(input)   
         }
     }),
@@ -42,9 +43,10 @@ $( document ).ready(function(){
 
 function autocomplete(text) {
     var url = ["http://www.omdbapi.com/?",
-               "s=", text,
+               "s=", encodeURIComponent(text),
                '&type=movie',
                 "&r=json"].join('');
+                console.log(url)
     var res = jQuery.getJSON(url, function( data ){
         if (data.Search) {
             var names = []
