@@ -23,7 +23,6 @@ $( document ).ready(function(){
     $('#name').keyup(function() {
         var input = $(this).val();    
         if (input.length > 2){
-            console.log(input.length);
             autocomplete(input)   
         } else {
             $('#name').autocomplete({source: []})
@@ -57,7 +56,6 @@ function autocomplete(text) {
                 })
             }) 
             $('#name').autocomplete({
-                delay: 300,
                 source: names,
                 select: function( event, ui ) {
                     runAll('', ui.item.id);
