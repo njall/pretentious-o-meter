@@ -41,6 +41,10 @@
 .subtitle {
     margin-top: 4%;
 }
+.amazon-ad {
+ width:729px;
+ margin: 0 auto 20 auto;
+}
 
 .legend {
 	width: 50%;
