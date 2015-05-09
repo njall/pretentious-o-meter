@@ -99,28 +99,39 @@ function iTunesProduct(film_slug) {
         dataType: 'jsonp',
         success: function(location) {
             country = location.country_code;
+            var url = 'http://itunes.apple.com/search?term=' + film_slug + ' &country='+ country + '&entity=movie'
+            $.ajax({
+                url: url,
+                dataType: 'jsonp',
+                success: function(data) { 
+                    if (data.resultCount && data.resultCount > 0) {
+                        var banner = '<iframe src="//banners.itunes.apple.com/banner.html?partnerId='
+                        banner += '&aId=1000l3vu'
+                        banner += '&bt=catalog'
+                        banner += '&t=catalog_white'
+                        banner += '&id=' + data.results[0].trackId 
+                        banner += '&c=' + country;
+                        banner += '&l=en-US'
+                        banner += '&w=728&h=90" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>'
+                        $('#itunes-banner').show();
+                        $('#itunes-banner').html(banner)
+                    }
+                }
+            })
         }   
     });
-    var url = 'http://itunes.apple.com/search?term=' + film_slug + ' &country=us&entity=movie'
-    $.ajax({
-        url: url,
-        dataType: 'jsonp',
-        success: function(data) { 
-            if (data.resultCount && data.resultCount > 0) {
-                var banner = '<iframe src="//banners.itunes.apple.com/banner.html?partnerId='
-                banner += '&aId=1000l3vu'
-                banner += '&bt=catalog'
-                banner += '&t=catalog_white'
-                banner += '&id=' + data.results[0].trackId 
-                banner += '&c=' + country;
-                banner += '&l=en-US'
-                banner += '&w=728&h=90" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>'
-                $('#itunes-banner').show();
-                $('#itunes-banner').html(banner)
-            }
-        }
-    })
 }
+
+function amazonProduct(film_slug) {
+    var banner = '<iframe src="'
+    var link = 'http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenometer-21&o=2&p=14&l=st1&mode=dvd-uk' 
+    link += '&search=' + film_slug
+    link += '&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr" marginwidth="0" marginheight="0"'
+    link += 'width="160" height="600" border="0" frameborder="0" style="border:none;'
+    banner += link + '" scrolling="no"></iframe>'
+    $('#amazon-banner').html(banner);
+}
+
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -163,6 +174,7 @@ function runAll(film_name, id){
                 ChangeUrl(film_slug, film_slug)
                 try {
                     iTunesProduct(data.Title);
+                    amazonProduct(data.Title);
                 } catch(err) { 
                     /* nvm */ 
                 }
