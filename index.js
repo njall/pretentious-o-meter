@@ -124,14 +124,12 @@ function iTunesProduct(film_slug) {
 
 function amazonProduct(film_slug) {
     var banner = '<iframe src="'
-    var link = 'http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenometer-21&o=2&p=14&l=st1&mode=dvd-uk' 
+    var link = 'http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenometer-21&o=2&p=48&l=st1&mode=dvd-uk' 
     link += '&search=' + film_slug
-    link += '&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr" marginwidth="0" marginheight="0"'
-    link += 'width="160" height="600" border="0" frameborder="0" style="border:none;'
+    link += '&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr" marginwidth="0" marginheight="0" width="728" height="90" border="0" frameborder="0" style="border:none;'
     banner += link + '" scrolling="no"></iframe>'
     $('#amazon-banner').html(banner);
 }
-
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

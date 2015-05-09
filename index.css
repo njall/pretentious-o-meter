@@ -41,7 +41,7 @@
 .subtitle {
     margin-top: 4%;
 }
-.amazon-ad {
+.advert {
  width:729px;
  margin: 0 auto 20 auto;
 }
@@ -49,6 +49,7 @@
 .legend {
 	width: 50%;
 	margin: 15px auto;
+	margin-bottom: 50px;
 }
 
 .legend-item {
@@ -85,10 +86,10 @@
 }
 
 .sharing-buttons {
+	margin-left: 100px;
 	display: none;
 	width: 70%;
-	margin: 15px auto;
-	margin-top: 300px;
+	float: left;
 }
 
 .copyright-footer {
