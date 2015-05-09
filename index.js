@@ -91,6 +91,37 @@ function setup_reddit(film_slug, social_desc) {
     $('#reddit-widget').html(widget);   
 }
 
+function iTunesProduct(film_slug) {
+    $('#itunes-banner').hide();
+    var country = 'US';
+    $.ajax({ 
+        url: '//freegeoip.net/json/', 
+        dataType: 'jsonp',
+        success: function(location) {
+            country = location.country_code;
+        }   
+    });
+    var url = 'http://itunes.apple.com/search?term=' + film_slug + ' &country=us&entity=movie'
+    $.ajax({
+        url: url,
+        dataType: 'jsonp',
+        success: function(data) { 
+            if (data.resultCount && data.resultCount > 0) {
+                var banner = '<iframe src="//banners.itunes.apple.com/banner.html?partnerId='
+                banner += '&aId=1000l3vu'
+                banner += '&bt=catalog'
+                banner += '&t=catalog_white'
+                banner += '&id=' + data.results[0].trackId 
+                banner += '&c=' + country;
+                banner += '&l=en-US'
+                banner += '&w=728&h=90" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>'
+                $('#itunes-banner').show();
+                $('#itunes-banner').html(banner)
+            }
+        }
+    })
+}
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -121,7 +152,6 @@ function runAll(film_name, id){
             url = [url, '&i=', id].join('');
         }
         var res = jQuery.getJSON(url, function( data ){
-            console.log(data);
             if (data.Response === 'False'){
                 $('#message').text(data.Error);
                 $('#message').attr('text-color', 'red');
@@ -131,6 +161,11 @@ function runAll(film_name, id){
             } else {
                 var film_slug = data.Title.replace(/\ /g, "+")
                 ChangeUrl(film_slug, film_slug)
+                try {
+                    iTunesProduct(data.Title);
+                } catch(err) { 
+                    /* nvm */ 
+                }
                 $('#film-info').show();
                 $('#title').text(data.Title);
                 $('#title').attr('href', 'http://www.imdb.com/title/' + data.imdbID)
@@ -268,7 +303,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                     setTimeout(function() {
                         $('#loader').hide();            
                     }, 500); 
-                    
+                   
                     $('#comments').show();
                     $('.comment-title').text(data.Title);
                     DISQUS.reset({
