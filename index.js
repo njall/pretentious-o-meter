@@ -1,6 +1,7 @@
-var country_code = ''
-$( document ).ready(function(){
+var country_code = '';
 
+$( document ).ready(function(){
+    var country_code = ''
     $.getScript("share.min.js");
     set_country_code();
     amazonPrime();
@@ -49,8 +50,8 @@ function set_country_code() {
         dataType: 'jsonp',
         success: function(location) {
             var cc = location.country_code; 
-            /*var cc = 'NL'*/
-            $('#country_code').text(cc);
+            /*var cc = 'DE'*/
+            $('#country_code').val(cc);
             country_code = cc;
         }
     })
@@ -108,7 +109,7 @@ function setup_reddit(film_slug, social_desc) {
 
 function iTunesProduct(film_slug) {
     $('#itunes-banner').hide();
-    var url = 'http://itunes.apple.com/search?term=' + film_slug + ' &country='+ country_code + '&entity=movie'
+    var url = 'http://itunes.apple.com/search?term=' + film_slug + ' &country=' + $('#country_code').val() + '&entity=movie'
     $.ajax({
         url: url,
         dataType: 'jsonp',
@@ -119,7 +120,7 @@ function iTunesProduct(film_slug) {
                 banner += '&bt=catalog'
                 banner += '&t=catalog_white'
                 banner += '&id=' + data.results[0].trackId 
-                banner += '&c=' + country_code;
+                banner += '&c=' + $('#country_code').val();
                 banner += '&l=en-US'
                 banner += '&w=728&h=90" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>'
                 $('#itunes-banner').show();
@@ -131,29 +132,40 @@ function iTunesProduct(film_slug) {
 
 function amazonProduct(film_slug) {
     var banner = '<iframe src="'
-        if ( country_code == 'GB' || country_code == 'IE'){
-            var link = 'http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenometer-21&o=2&p=48&l=st1&mode=dvd-uk' 
-            link += '&search=' + film_slug
-            link += '&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr'
-        } else if (country_code == 'DE') {
-            var link = "http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenomete03-21&o=3&p=48&l=st1&mode=dvd-de"
-            link += "&search=" + film_slug
-            link += "&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr"
-        } else if (country_code == 'FR') {
-            var link = "http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenomet0c3-21&o=8&p=48&l=st1&mode=dvd-fr&"
-            link += "&search=" + film_slug
-            link += "&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr"
-        } else {
-            var link = "http://rcm-na.amazon-adsystem.com/e/cm?t=pretenometer-20&o=1&p=48&l=st1&mode=dvd" 
-            link += "&search= " + film_slug 
-            link += "&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr"
-        }
+    var country_code = $('#country_code').val();
+    if (!(country_code)) {
+        set_country_code();
+    }
+    if ( country_code == 'GB' || country_code == 'IE'){
+        var link = 'http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenometer-21&o=2&p=48&l=st1&mode=dvd-uk' 
+        link += '&search=' + film_slug
+        link += '&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr'
+    } else if (country_code == 'DE') {
+        var link = "http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenomete03-21&o=3&p=48&l=st1&mode=dvd-de"
+        link += "&search=" + film_slug
+        link += "&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr"
+    } else if (country_code == 'FR') {
+        var link = "http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenomet0c3-21&o=8&p=48&l=st1&mode=dvd-fr"
+        link += "&search=" + film_slug
+        link += "&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr"
+    } else if (country_code == 'CA') { 
+        var link = "http://rcm-na.amazon-adsystem.com/e/cm?t=thepretomete-20&o=15&p=48&l=st1&mode=dvd-ca"
+        link += "&search=" + film_slug 
+        link += "fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr"
+    } else if (country_code == 'US') {
+        var link = "http://rcm-na.amazon-adsystem.com/e/cm?t=pretenometer-20&o=1&p=48&l=st1&mode=dvd" 
+        link += "&search= " + film_slug 
+        link += "&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr"
+    } else { var skip = true; }
+    if (!(skip == true)) {
         banner += link + '" marginwidth="0" marginheight="0"width="728" height="90" border="0" frameborder="0" style="border:none;'
         banner += 'scrolling="no"></iframe>'
         $('#amazon-banner').html(banner);
+    }      
 }
 
 function amazonPrime() {
+    var country_code = $('#country_code').val() 
         if ( country_code == 'GB' || country_code == 'IE'){
             $('#prime-banner').html('<iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenometer-21&o=2&p=48&l=ur1&category=piv&banner=1Y2RWQMYHB249C1M5FG2&f=ifr" width="728" height="90" scrolling="no" border="0" marginwidth="0" margin-left="40px" style="border:none;" frameborder="0"></iframe>')
         } else if (country_code == 'DE') {
@@ -161,11 +173,12 @@ function amazonPrime() {
         } else if (country_code == 'FR') {
             $('#prime-banner').html('<iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenomet0c3-21&o=8&p=48&l=ur1&category=premium&banner=0JSPDPB933M05T8J8XG2&f=ifr" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>')
         } else if (country_code == 'ES' || country_code == 'PT') {
-                $('#prime-banner').html('<iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenomete0d-21&o=30&p=48&l=ur1&category=dvd&banner=1R9ZD165XRM3PQHSA5G2&f=ifr" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>')
-        } else /*US*/ {
+            $('#prime-banner').html('<iframe src="http://rcm-eu.amazon-adsystem.com/e/cm?t=pretenomete0d-21&o=30&p=48&l=ur1&category=gift_certificates&banner=1SYGJ5YPBSBT9BEY35G2&f=ifr" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>')
+        } else if (country_code == 'CA') {
+            $('#prime-banner').html('<iframe src="http://rcm-na.amazon-adsystem.com/e/cm?t=thepretomete-20&o=15&p=48&l=ur1&category=gift_certificates&banner=1SJN38R3Q478XB29DQR2&f=ifr" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>')
+        } else if (country_code == 'US') /*US*/ {
             $('#prime-banner').html('<iframe src="http://rcm-na.amazon-adsystem.com/e/cm?t=pretenometer-20&o=1&p=48&l=ur1&category=primemain&banner=1PREMK5A0BD4VB6F8Y02&f=ifr&linkID=VKRULXPP57R7RGMR" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>')
         }
-
 }
 
 function getParameterByName(name) {
