@@ -6,6 +6,14 @@ $( document ).ready(function(){
     set_country_code();
     amazonPrime();
     var name = getParameterByName('q');
+    if (getParameterByName('imdb') == 'true'){
+        $('#imdb').prop('checked', true);
+        $('#imdblabel').addClass('active');
+    } if (getParameterByName('rt') == 'false'){
+        $('#rt').prop('checked', false);
+        $('#rtlabel').removeClass('active');
+    } else {
+    }
     if (name != '') {
         runAll(name);
     }
@@ -92,10 +100,21 @@ function toggleRatings() {
     $('#rt-rating-percent').toggle();
 }
 
+function create_url_parameter(film_name){
+    var url = '?q=' + film_name.replace(/\ /g, '+')
+    if (!($('#rt').is(':checked'))) {
+        url += '&rt=false'
+    }
+    if ($('#imdb').is(':checked')) {
+        url += '&imdb=true'
+    }
+    return url
+}
+
 function setup_reddit(film_slug, social_desc) {
-    var url = 'http://pretentious-o-meter.co.uk?q%3d' + encodeURIComponent(film_slug)
+    var url = 'http://pretentious-o-meter.co.uk/' + create_url_parameter(film_slug)
     var base_url = 'http://www.reddit.com/static'
-    var widget = "<iframe src=\"" + base_url + "/button/button3.html?width=120&url=" + url
+    var widget = "<iframe src=\"" + base_url + "/button/button3.html?width=120&url=" + encodeURIComponent(url)
     widget += '&title=' + encodeURIComponent(social_desc)
     widget += '&sr=' + 'pretentiousometer'
     widget += '&newwindow=' + '1'
@@ -190,7 +209,7 @@ function getParameterByName(name) {
 
 function ChangeUrl(page, url) {
         if (typeof (history.pushState) != "undefined") {
-            var obj = { Page: page, Url: '?q=' + url };
+            var obj = { Page: page, Url: create_url_parameter(url) };
             history.pushState(obj, obj.Page, obj.Url);
         } else {
             console.log("Browser does not support HTML5.");
@@ -311,7 +330,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                             text = 'The people and the critics have a consensus.';
                             break;
                         case( !pretentious && score <= 50 && score > 25):
-                            text = 'Probably a touch predictable';
+                            text = 'Probably quite entertaining';
                             break;
                         case (!pretentious && score > 50 && score < 75):
                             text = 'The audience likes this one a lot more than critics do.';
@@ -345,14 +364,14 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                         $('#pret-val').text(Math.round(score) + '% Pretentious');
                         film_slug.replace("+", "%2B")
                         var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
-                        '%25 pretentious on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
+                        '%25 pretentious on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk/' + encodeURIComponent(create_url_parameter(film_slug))
                         var social_desc = data.Title + ' is ' + Math.round(score) + '% pretentious on the Pretentious-O-Meter!'
                     } else {
                         $('#mass-market').attr('style', 'width: ' + score + '%; float: right; background-color:' + bar_colour);
                         $('#pretentious').attr('style', 'width: 0%; background-color:' + bar_colour);
                         $('#pret-val').text(Math.round(score) + '% Mass Market');
                         var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 
-                        '%25 mass market on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk?q=' + encodeURIComponent(film_slug)
+                        '%25 mass market on the Pretentious-O-Meter! %0Ahttp://pretentious-o-meter.co.uk/' + encodeURIComponent(create_url_parameter(film_slug))
                         var social_desc = data.Title + ' is ' + Math.round(score) + '% mass market on the Pretentious-O-Meter!'
                     }  
 
@@ -368,13 +387,13 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                         config: function () {  
                             this.page.identifier = film_slug,
                             this.page.title = data.Title,
-                            this.page.url = 'http://pretentious-o-meter.co.uk?q=' + film_slug
+                            this.page.url = 'http://pretentious-o-meter.co.uk/' + create_url_parameter(film_slug)
                         }
                     });
                     
                     $('#sharing-button-text').show();
                     var share = new Share(".sharing-button", {
-                        url: 'http://pretentious-o-meter.co.uk?q=' + film_slug,
+                        url: 'http://pretentious-o-meter.co.uk/' + create_url_parameter(film_slug),
                         description: social_desc,
                         title: social_desc,
                         image: 'http://pretentious-o-meter.co.uk/pretentiouscat1.gif',
@@ -389,6 +408,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                             facebook: {
                                 caption: social_desc,
                                 app_id: 287504138040462,
+                                load_sdk: false, /*This is a fallback - Need to fix SDK stuff*/
                                 after: function() {
                                    this.toggle();
                                    this.toggle();
@@ -405,6 +425,7 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                                 }
                             },
                             google_plus: {
+                                url: encodeURIComponent('http://pretentious-o-meter.co.uk/' + create_url_parameter(film_slug)),
                                 after: function() {
                                    this.toggle();
                                    this.toggle();
