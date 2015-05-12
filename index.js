@@ -39,7 +39,12 @@ $( document ).ready(function(){
             $('#name').autocomplete({source: []})
         }
     }),
-
+    $('#imdb').change(function() {
+        runAll(getParameterByName('q'))
+    }),
+    $('#rt').change(function() {
+        runAll(getParameterByName('q'))
+    }),
     $(document).keypress(function(e){
         if(e.which == 13) {
             var film_name = $('#name').val();
