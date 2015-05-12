@@ -89,6 +89,7 @@ function autocomplete(text) {
     })
 }
 
+
 function toggleRatings() {
     $('#meta-original').toggle();
     $('#meta-percent').toggle();
@@ -237,6 +238,7 @@ function runAll(film_name, id){
                         $('#loader').hide();            
                }, 500); 
             } else {
+                console.log(data)
                 var film_slug = data.Title.replace(/\ /g, "+")
                 ChangeUrl(film_slug, film_slug)
                     iTunesProduct(data.Title);
@@ -341,7 +343,8 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                     };      
 
                     var bar_colour = 'blue';
-                    var rating = (public_rating + critic_rating)/2
+                    var rating = (parseInt(public_rating) + parseInt(critic_rating))/2
+                    console.log(public_rating + ' ' + critic_rating + '=' + rating)
                     switch (true){
                         case (rating > 73):
                             bar_colour = 'green'
@@ -359,8 +362,13 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
 
 
                     if (pretentious) {
-                        $('#pretentious').attr('style', 'width: ' + score + '%; background-color:' + bar_colour);
-                        $('#mass-market').attr('style', 'width: 0%; float: right; background-color:' + bar_colour);
+                        if (score == 0){
+                            $('#pretentious').attr('style', 'width: 2%; background-color:' + bar_colour);
+                            $('#mass-market').attr('style', 'width: 2%; float: right; background-color:' + bar_colour);    
+                        } else {
+                            $('#pretentious').attr('style', 'width: ' + score + '%; background-color:' + bar_colour);
+                            $('#mass-market').attr('style', 'width: 0%; float: right; background-color:' + bar_colour);
+                        }
                         $('#pret-val').text(Math.round(score) + '% Pretentious');
                         film_slug.replace("+", "%2B")
                         var twitter_desc = encodeURIComponent(data.Title) + ' is ' + Math.round(score) + 

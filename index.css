@@ -20,6 +20,9 @@
     display:none
 }
 
+.progress {
+  border-radius: 0px;
+}
 .header-title {
     float: left;
 }
