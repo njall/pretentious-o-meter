@@ -66,6 +66,10 @@ function set_country_code() {
             /*var cc = 'DE'*/
             $('#country_code').val(cc);
             country_code = cc;
+        },
+        error: function(error) {
+            $('#country_code').val('US');
+            country_code = 'US';
         }
     })
 }
