@@ -392,6 +392,12 @@ As so I'm dampening the critic score of pretentious films by how old they are pa
                         var social_desc = data.Title + ' is ' + Math.round(score) + '% mass market on the Pretentious-O-Meter!'
                     }  
 
+                    if (film_name == 'Fired+Up!'){
+                        $('#pret-val').text('100% Awesome')
+                        $('#mass-market').attr('style', 'width: ' + 100 + '%; float: right; background-color:' + 'orangered');
+                        $('#pretentious').attr('style', 'width: 100%; background-color:' + 'orangered');
+                    }
+
                     $('#message').text(text);
                     setTimeout(function() {
                         $('#loader').hide();            
